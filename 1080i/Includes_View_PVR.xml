@@ -1,36 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
     <include name="View_PVR_ChannelGroups">
+		<!-- added posy -->
+		<posy>150</posy>
+        <!-- START: Images added to display left/right arrows when Categories/Groups in focus -->
+		<control type="image">
+		    <posx>-50</posx>						
+ 		   	<width>40</width>
+ 		    <height>60</height>						
+ 		    <texture colordiffuse="main_fg_12" border="10">common/box.png</texture>
+ 		    <visible>Control.HasFocus(11)</visible>						
+ 		</control>
+		<control type="image">
+		    <posx>-50</posx>						
+ 		    <width>40</width>
+ 		    <height>60</height>						
+ 		    <texture>buttons/spin-left.png</texture>
+ 		    <visible>Control.HasFocus(11)</visible>						
+ 		</control>				
+		<control type="image">
+		    <posx>1770</posx>						
+ 		    <width>40</width>
+ 		   	<height>60</height>						
+ 		    <texture colordiffuse="main_fg_12" border="10">common/box.png</texture>
+ 		    <visible>Control.HasFocus(11)</visible>						
+ 		</control>									
+ 		<control type="image">
+ 		    <posx>1770</posx>						
+ 		    <width>40</width>
+ 		    <height>60</height>
+ 		    <texture>buttons/spin-right.png</texture>
+ 		    <animation effect="fade" start="0" end="100" time="150">VisibleChange</animation>
+ 		    <visible>Control.HasFocus(11)</visible>
+ 		    </control>
+		<!-- END: Images added to display left/right arrows when Categories/Groups in focus -->	
         <control type="list" id="11">
             <nested />
-            <height>item_list_height_half</height>
+			<!-- posx added -->
+			<posx>3</posx>
+            <!-- height changed from item_list_height_half -->
+            <height>60</height>
+            <!-- width added -->
+            <width>1760</width>
             <orientation>horizontal</orientation>
-            <itemlayout width="210" height="item_list_height_half">
-                <control type="label">
+            <!-- height changed from item_list_height and width changed from 210 -->
+            <itemlayout width="176" height="60">
+				<!-- Original Label Removed -->
+                <!--control type="label">
                     <align>left</align>
                     <aligny>center</aligny>
                     <textcolor>main_fg_30</textcolor>
                     <font>font_tiny</font>
                     <label>$INFO[ListItem.Label]</label>
-                </control>
+                </control -->
+				
+				<!-- Texture and Textbox Added -->
+				<control type="image">
+				   	<width>170</width>
+				   	<texture colordiffuse="main_bg_30" border="10">common/box.png</texture>
+			    </control>							
+				<control type="textbox">
+				    <width>165</width>
+				    <label>$INFO[ListItem.Label]</label>
+				    <aligny>center</aligny>
+				    <align>center</align>
+				    <textcolor>main_fg_70</textcolor>
+				    <font>font_info_buttons</font>
+				    <wrapmultiline>true</wrapmultiline>
+				    <autoscroll time="3600" delay="6000" repeat="6000">true</autoscroll>
+				</control>	
             </itemlayout>
-            <focusedlayout width="210" height="item_list_height_half">
-                <control type="label">
+            <!-- height changed from item_list_height and width changed from 210 -->
+            <focusedlayout width="176" height="60">
+				<!-- Original Label Removed -->
+                <!-- control type="label">
                     <align>left</align>
                     <aligny>center</aligny>
                     <textcolor>main_fg_100</textcolor>
                     <font>font_tiny_bold</font>
                     <label>$INFO[ListItem.Label]</label>
                     <visible>Control.HasFocus(11)</visible>
-                </control>
-                <control type="label">
+                </control -->
+				<!-- Texture and Textbox Added -->
+				<control type="image">
+				    <texture colordiffuse="main_fg_70" border="10">common/box.png</texture>
+				    <width>170</width>
+				</control>							
+				<control type="textbox">
+				    <width>165</width>							
+				    <label>$INFO[ListItem.Label]</label>
+				    <aligny>center</aligny>
+				    <align>center</align>
+				    <textcolor>main_bg_100</textcolor>
+				    <font>font_info_buttons</font>
+				    <wrapmultiline>true</wrapmultiline>
+				    <visible>Control.HasFocus(11)</visible>
+				    <autoscroll time="3600" delay="6000" repeat="6000">true</autoscroll>
+				</control>							
+				<!-- Original Label Removed -->
+                <!-- control type="label">
                     <align>left</align>
                     <aligny>center</aligny>
                     <textcolor>main_fg_70</textcolor>
                     <font>font_tiny_bold</font>
                     <label>$INFO[ListItem.Label]</label>
                     <visible>!Control.HasFocus(11)</visible>
-                </control>
+                </control -->
+				<!-- Texture and Textbox Added -->
+				<control type="image">
+				    <texture colordiffuse="main_fg_70" border="10">common/box.png</texture>
+				    <width>170</width>
+				</control>							
+				<control type="textbox">
+				    <width>165</width>							
+				    <label>$INFO[ListItem.Label]</label>
+				    <aligny>center</aligny>
+				    <align>center</align>
+				    <textcolor>main_bg_100</textcolor>
+				    <font>font_info_buttons</font>
+				    <wrapmultiline>true</wrapmultiline>
+				    <visible>!Control.HasFocus(11)</visible>
+				    <autoscroll time="3600" delay="6000" repeat="6000">true</autoscroll>
+				</control>				
             </focusedlayout>
         </control>
     </include>
@@ -328,32 +419,86 @@
                         <texture colordiffuse="$VAR[ColorGradient]" border="8">common/box-gradient.png</texture>
                         <visible>$PARAM[selectbox]</visible>
                     </control>
+					<!-- remove Selected texture -->
                     <control type="image">
-                        <texture colordiffuse="$PARAM[colordiffuse-playing]">common/selected.png</texture>
+                        <!-- texture colordiffuse="$PARAM[colordiffuse-playing]">common/selected.png</texture>
                         <aspectratio aligny="top">center</aspectratio>
-                        <visible>ListItem.IsPlaying</visible>
+                        <visible>ListItem.IsPlaying</visible -->
                     </control>
                     <control type="label">
-                        <left>30</left>
+						<!-- left changed from 30 -->
+                        <left>10</left>
                         <right>110</right>
                         <font>$PARAM[font]</font>
                         <textcolor>$PARAM[textcolor]</textcolor>
                         <selectedcolor>$PARAM[textcolor]</selectedcolor>
-                        <label>$VAR[Label_PVRGuide_ChannelNumber,,. ]$VAR[Label_PVRGuide_ChannelName]</label>
+                        <!-- changed from $VAR[Label_PVRGuide_ChannelNumber,,. ]$INFO[ListItem.ChannelName] -->
+                        <label>$VAR[Label_PVRGuide_ChannelNumber,, ]</label>
                     </control>
                 </control>
-                <include content="Object_PVR_Icon">
+				<!-- Include Icon removed -->
+                <!-- include content="Object_PVR_Icon">
                     <param name="fgcolor" value="$PARAM[icon-fgcolor]" />
                     <param name="bgcolor" value="$PARAM[icon-bgcolor]" />
                     <param name="height" value="74" />
                     <param name="font" value="font_statusbar_bold" />
-                </include>
+                </include -->
+				<!-- Customised Icon added for Slim EPG view -->
+		        <control type="image">
+			        <posx>35</posx>
+			        <posy>11</posy>
+			        <width>217</width>
+			        <height>61</height>
+			        <bordersize>0</bordersize>
+			        <texture>$INFO[ListItem.Icon]</texture>
+			        <aspectratio aligny="center" align="right">keep</aspectratio>
+			        <visible>!Skin.HasSetting(PVRGuide.ColorDiffuse)</visible>
+		        </control>
+				<!-- Channel Resolution icons added -->
+				<control type="image">
+					<left>255</left>
+					<top>23</top>
+					<width>58.5</width>
+					<height>38</height>									
+					<texture>pvr/fhd.png</texture>
+					<visible>String.Contains(ListItem.ChannelName," FHD")</visible>
+					<align>center</align>
+					<aligny>center</aligny>
+					<aspectratio>keep</aspectratio>
+				</control>
+				<control type="image">
+					<left>255</left>
+					<top>23</top>
+					<width>47</width>
+					<height>38</height>									
+					<texture>pvr/hd.png</texture>
+					<visible>String.Contains(ListItem.ChannelName," HD")</visible>
+					<align>center</align>
+					<aligny>center</aligny>
+					<aspectratio>keep</aspectratio>
+				</control>
+                	<control type="image">
+					<left>255</left>
+					<top>23</top>
+					<width>43</width>
+					<height>38</height>								
+					<texture>pvr/sd.png</texture>
+					<visible>String.Contains(ListItem.ChannelName," SD")</visible>
+					<align>center</align>
+					<aligny>center</aligny>
+					<aspectratio>keep</aspectratio>
+				</control>
+				<!-- End of Channel Resolution icons -->
             </control>
         </definition>
     </include>
 
     <include name="View_PVR_EpgGrid">
         <control type="epggrid" id="10" description="EPG">
+			<!-- posy added -->
+	        <posy>45</posy>
+	        <!-- height added -->
+	        <height>640</height>
             <onup>11</onup>
             <ondown>11</ondown>
             <onback condition="Skin.HasSetting(PVRGuide.BackGroups)">11</onback>
@@ -371,13 +516,35 @@
                     <width>521</width>
                     <align>left</align>
                     <aligny>top</aligny>
-                    <font>font_statusbar</font>
+                    <!-- font changed from font_statusbar -->
+                    <font>font_tiny_bold</font>
                     <label>$INFO[ListItem.Label]</label>
-                    <textcolor>main_fg_70</textcolor>
+                    <!-- textcolor changed from main_fg_30 to yellow --> 
+                    <textcolor>ffe5b535</textcolor>
                 </control>
             </rulerlayout>
             <channellayout height="item_list_height" width="340">
                 <include>View_PVR_ChannelLayout</include>
+				<!-- "Has Archive" icon added -->
+				<control type="image">
+					<aspectratio align="right">keep</aspectratio>
+					<left>310</left>
+					<top>5</top>
+					<width>24</width>
+					<height>24</height>
+					<texture>indicator/hasarchive.png</texture>
+					<visible>ListItem.HasArchive</visible>
+                </control>
+				<!-- "Recording Available" icon added -->
+				<control type="image">
+					<aspectratio align="right">keep</aspectratio>
+					<left>310</left>
+					<top>50</top>
+					<width>24</width>
+					<height>24</height>
+					<texture>indicator/recordingok.png</texture>
+					<visible>Integer.IsGreater(ListItem.ChannelNumberLabel,199)</visible>
+				</control>
             </channellayout>
             <focusedchannellayout height="item_list_height" width="340">
                 <include content="View_PVR_ChannelLayout">
@@ -393,6 +560,26 @@
                     <param name="icon-bgcolor" value="main_fg" />
                     <visible>Control.HasFocus(10)</visible>
                 </include>
+				<!-- "Has Archive" icon added -->
+				<control type="image">
+					<aspectratio align="right">keep</aspectratio>
+					<left>310</left>
+					<top>5</top>
+					<width>24</width>
+					<height>24</height>
+					<texture>indicator/hasarchive.png</texture>
+					<visible>ListItem.HasArchive</visible>
+                </control>
+				<!-- "Recording Available" icon added -->
+				<control type="image">
+					<aspectratio align="right">keep</aspectratio>
+					<left>310</left>
+					<top>50</top>
+					<width>24</width>
+					<height>24</height>
+					<texture>indicator/recordingok.png</texture>
+					<visible>Integer.IsGreater(ListItem.ChannelNumberLabel,199)</visible>
+				</control>
             </focusedchannellayout>
             <itemlayout height="item_list_height" width="521">
                 <include content="View_PVR_EpgLayout">
@@ -437,7 +624,8 @@
                 <visible>$PARAM[selectbox]</visible>
                 <visible>$PARAM[visible]</visible>
             </control>
-            <control type="image" id="2">
+			<!-- Remove "Is Playable" because "Has Archive" is used in Channel Layout -->
+            <!-- control type="image" id="2">
                 <aspectratio align="right">keep</aspectratio>
                 <top>5</top>
                 <width>517</width>
@@ -445,7 +633,7 @@
                 <texture colordiffuse="$PARAM[fgcolor]">indicator/library.png</texture>
                 <visible>ListItem.IsPlayable + !ListItem.IsRecording</visible>
                 <visible>$PARAM[visible]</visible>
-            </control>
+            </control -->
             <control type="image" id="2">
                 <aspectratio align="right">keep</aspectratio>
                 <top>5</top>
@@ -460,8 +648,19 @@
                 <top>5</top>
                 <width>517</width>
                 <height>24</height>
-                <texture>indicator/record.png</texture>
+				<!-- texture changed from record.png -->
+                <texture>indicator/isrecording.png</texture>
                 <visible>ListItem.IsRecording</visible>
+                <visible>$PARAM[visible]</visible>
+            </control>
+			<!-- Reminder icon added -->
+            <control type="image" id="2">
+                <aspectratio align="right">keep</aspectratio>
+                <top>5</top>
+                <width>517</width>
+                <height>24</height>
+                <texture>indicator/reminder.png</texture>
+                <visible>ListItem.HasReminder</visible>
                 <visible>$PARAM[visible]</visible>
             </control>
             <control type="label" id="1">
@@ -513,9 +712,12 @@
         </definition>
     </include>
 
-    <include name="View_PVR_Guide_Top"><top>320</top></include>
+	<!-- top position changed from 320 -->
+    <include name="View_PVR_Guide_Top"><top>226</top></include>
 
     <include name="View_PVR_Guide_Info">
+		<!-- added posy -->
+		<posy>200</posy>
         <!-- <control type="group">
             <height>320</height>
             <width>480</width>
@@ -528,11 +730,12 @@
             <control type="image">
                 <texture colordiffuse="black" border="10">common/box.png</texture>
             </control>
-            <control type="videowindow">
+            <control type="videowindow">22
             </control>
         </control> -->
-        <control type="grouplist">
-            <orientation>vertical</orientation>
+        <!-- control type="grouplist">
+			<!-- Original Program Info removed -->
+            <!-- orientation>vertical</orientation>
             <usecontrolcoords>true</usecontrolcoords>
             <itemgap>0</itemgap>
             <height>275</height>
@@ -563,8 +766,67 @@
                 <param name="height" value="120" />
                 <param name="label" value="$INFO[ListItem.NextPlot]" />
                 <visible>Control.HasFocus(9400)</visible>
-            </include>
-        </control>
+            </include -->
+		<!-- control -->
+			<!-- Program Title Added -->
+			<control type="label">
+				<label>$INFO[ListItem.Label]</label>
+				<height>40</height>
+				<aligny>top</aligny>
+				<textcolor>ffe5b535</textcolor>
+				<font>font_notification</font>
+				<posx>0</posx>
+				<posy>-40</posy>
+			</control>
+			<!-- Program Times Added -->
+			<control type="label">
+				<posx>1400</posx>
+				<posy>-40</posy>
+				<width>218</width>
+				<height>40</height>
+				<align>right</align>
+				<aligny>top</aligny>
+				<textcolor>ffe5b535</textcolor>
+				<font>font_notification</font>
+				<label>$INFO[ListItem.StartTime]$INFO[ListItem.EndTime, - ,]</label>
+			</control>
+			<!-- Program Plot Added -->
+			<control type="textbox">	
+				<posx>0</posx>
+				<posy>-5</posy>
+				<label fallback="19055">$INFO[ListItem.Plot]</label>
+				<aligny>top</aligny>
+				<align>justify</align>
+				<textcolor>main_fg_70</textcolor>
+				<font>font_plotbox</font>
+				<width>1400</width>
+				<height>125</height>
+				<wrapmultiline>true</wrapmultiline>
+				<autoscroll time="3600" delay="6000" repeat="6000">true</autoscroll>
+			</control>	
+			<!-- PIP Video Window Added -->
+			<control type="videowindow">
+				<posx>2100</posx>
+				<posy>-500</posy>
+				<width>1280</width>
+				<height>720</height>
+				<animation type="Conditional" condition="!Control.IsVisible(5000)">
+			    <effect type="zoom" end="25" center="1225,102" time="400" />
+				</animation>
+			</control>   
+			<!-- Program Artwork -->
+			<control type="image">
+				<align>right</align>
+				<posx>1475</posx>
+				<posy>-40</posy>
+				<width>294</width>
+				<height>160</height>
+				<aspectratio>keep</aspectratio>
+				<!-- For NextPVR artwork use $INFO[ListItem.ActualIcon] or $INFO[ListItem.EPGEventIcon]; can also use .Fanart etc. -->
+				<texture fallback="special://xbmc/media/splash.jpg">$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Thumb)]</texture>
+				<visible>!Player.HasMedia</visible>
+			</control>			
+        
     </include>
 
     <include name="View_PVR_Guide_ProgressLine_Full">
@@ -572,7 +834,9 @@
     </include>
 
     <include name="View_PVR_Guide_ProgressLine_Half">
-        <progresstexture border="5" colordiffuse="bf777777">pvr/progressline-half.png</progresstexture>
+        <!-- border changed from 5 -->
+	    <!-- colordiffuse changed from bf777777 -->
+        <progresstexture border="5,55,5,5" colordiffuse="77fffffff">pvr/progressline-half.png</progresstexture>
     </include>
 
     <include name="View_PVR_Channels">

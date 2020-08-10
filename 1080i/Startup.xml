@@ -9,6 +9,8 @@
     <onload condition="!Skin.HasSetting(SkinInit)">Skin.SetBool(TMDbHelper.Service)</onload>
     <onload condition="!Skin.HasSetting(SkinInit)">Skin.SetBool(TMDbHelper.DisablePersonStats)</onload>
     <onload condition="!Skin.HasSetting(SkinInit)">Skin.SetBool(SkinInit)</onload>
+	<!-- enable Skin Helper PVR Thumbs -->
+	<onload condition="!Skin.HasSetting(SkinHelper.EnablePVRThumbs)">Skin.SetBool(SkinHelper.EnablePVRThumbs)</onload>
 
 
     <onload condition="!String.IsEmpty(Skin.String(StartupPlaylist))">ReplaceWindow(1113)</onload>
