@@ -430,7 +430,8 @@
                         <left>10</left>
                         <right>110</right>
                         <font>$PARAM[font]</font>
-                        <textcolor>$PARAM[textcolor]</textcolor>
+						<!-- textcolor changed from $PARAM[textcolor]-->
+                        <textcolor>main_fg_70</textcolor>
                         <selectedcolor>$PARAM[textcolor]</selectedcolor>
                         <!-- changed from $VAR[Label_PVRGuide_ChannelNumber,,. ]$INFO[ListItem.ChannelName] -->
                         <label>$VAR[Label_PVRGuide_ChannelNumber,, ]</label>
