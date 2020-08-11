@@ -105,12 +105,7 @@
                     <font>font_tiny_bold</font>
                     <label>$INFO[ListItem.Label]</label>
                     <visible>!Control.HasFocus(11)</visible>
-                </control -->
-				<!-- Texture and Textbox Added -->
-				<control type="image">
-				    <texture colordiffuse="main_fg_70" border="10">common/box.png</texture>
-				    <width>170</width>
-				</control>							
+                </control -->					
 				<control type="textbox">
 				    <width>165</width>							
 				    <label>$INFO[ListItem.Label]</label>
