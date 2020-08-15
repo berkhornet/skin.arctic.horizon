@@ -441,7 +441,7 @@
                 </include -->
 				<!-- Customised Icon added for Slim EPG view -->
 		        <control type="image">
-			        <posx>35</posx>
+			        <posx>40</posx>
 			        <posy>11</posy>
 			        <width>217</width>
 			        <height>61</height>
