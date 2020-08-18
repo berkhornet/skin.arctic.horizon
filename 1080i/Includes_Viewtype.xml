@@ -190,19 +190,20 @@
 
     <include name="Viewtype_KodiLogo">
         <param name="textcolor" default="dialog_fg_100" />
+        <param name="profilepic" default="Skin.HasSetting(ProfilePicture)" />
         <definition>
             <control type="group">
+                <nested />
                 <centertop>100</centertop>
                 <height>128</height>
-                <nested />
-                <include content="Object_Control" condition="!Skin.HasSetting(ProfilePicture)">
+                <include content="Object_Control" condition="!$PARAM[profilepic]">
                     <param name="type" value="image" />
                     <left>16</left>
                     <width>128</width>
                     <bordersize>20</bordersize>
                     <texture colordiffuse="$VAR[ColorHighlight]">$VAR[Image_SkinLogo]</texture>
                 </include>
-                <include content="Object_Control" condition="Skin.HasSetting(ProfilePicture)">
+                <include content="Object_Control" condition="$PARAM[profilepic]">
                     <param name="type" value="group" />
                     <control type="image">
                         <left>16</left>
@@ -268,6 +269,7 @@
         <oninfo condition="ListItem.IsCollection">ActivateWindow(1140)</oninfo>
         <oninfo condition="Container.Content(actors) | Container.Content(directors)">RunScript(plugin.video.themoviedb.helper,add_query=$INFO[Container.ListItem.Label],type=person,call_auto=1190,return)</oninfo>
         <pagecontrol>60</pagecontrol>
+        <!-- <onfocus>ClearProperty(WallMode)</onfocus> -->
     </include>
 
     <include name="Viewtype_Poster_Item">
@@ -1483,7 +1485,7 @@
             <onback>Container.SetViewMode($PARAM[id])</onback>
             <onback>1$PARAM[id]$PARAM[id]</onback>
             <visible>$EXP[Exp_View_$PARAM[id]]</visible>
-            <visible>!String.IsEmpty(Window.Property(WallMode))</visible>
+            <visible>String.IsEqual(Window.Property(WallMode),Container.FolderPath)</visible>
             <nested />
         </include>
     </include>
