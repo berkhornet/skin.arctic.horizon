@@ -547,13 +547,14 @@
                     <visible>!Control.HasFocus(10)</visible>
                 </include>
                 <include content="View_PVR_ChannelLayout">
-                    <param name="colordiffuse-bg" value="$VAR[ColorHighlight]" />
+					<!-- Disable Highlighting in focussed Channel Layout -->
+                    <!-- param name="colordiffuse-bg" value="$VAR[ColorHighlight]" />
                     <param name="colordiffuse-playing" value="main_bg_12" />
                     <param name="textcolor" value="Selected" />
                     <param name="font" value="font_tiny_bold" />
                     <param name="selectbox" value="true" />
                     <param name="icon-fgcolor" value="main_bg" />
-                    <param name="icon-bgcolor" value="main_fg" />
+                    <param name="icon-bgcolor" value="main_fg" / -->
                     <visible>Control.HasFocus(10)</visible>
                 </include>
 				<!-- "Has Archive" icon added -->
