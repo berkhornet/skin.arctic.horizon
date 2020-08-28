@@ -149,7 +149,7 @@
         },
         "files": {
             "rule": "Container.Content(files)",
-            "viewtypes": ["55"],
+            "viewtypes": ["55", "50", "501"],
             "library": "55"
         },
         "unknown": {
