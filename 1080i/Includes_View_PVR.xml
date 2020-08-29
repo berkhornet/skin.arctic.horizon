@@ -713,6 +713,8 @@
         <!-- control type="grouplist">
 			<!-- Original Program Info removed -->
             <!-- orientation>vertical</orientation>
+        <control type="grouplist">
+            <orientation>vertical</orientation>
             <usecontrolcoords>true</usecontrolcoords>
             <itemgap>0</itemgap>
             <height>275</height>
