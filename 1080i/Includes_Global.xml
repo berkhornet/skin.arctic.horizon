@@ -146,6 +146,8 @@
     </variable>
 
     <variable name="Global_Background_Image">
+		<!-- add value condition for PVR Guide Blur Background -->
+		<value condition="!Skin.HasSetting(DisableBlur) + Window.IsVisible(MyPVRGuide.xml)">special://skin/extras/backgrounds/pvr-background.jpg</value>
         <value condition="!String.IsEmpty(Window(1141).Property(GlobalBackground))">$INFO[Window(1141).Property(GlobalBackground)]</value>
         <value condition="!String.IsEmpty(Window(1142).Property(GlobalBackground))">$INFO[Window(1142).Property(GlobalBackground)]</value>
         <value condition="!Skin.HasSetting(DisableBlur)">$INFO[Window(Home).Property(TMDbHelper.ListItem.BlurImage)]</value>

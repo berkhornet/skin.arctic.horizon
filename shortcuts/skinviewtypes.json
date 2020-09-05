@@ -139,8 +139,8 @@
         },
         "episodes": {
             "rule": "Container.Content(episodes)",
-            "viewtypes": ["54", "504", "55"],
-            "library": "54"
+            "viewtypes": ["54", "504", "55", "500", "52", "502"],
+            "library": "500"
         },
         "songs": {
             "rule": "Container.Content(songs)",
@@ -149,7 +149,7 @@
         },
         "files": {
             "rule": "Container.Content(files)",
-            "viewtypes": ["55"],
+            "viewtypes": ["55", "50", "51", "501"],
             "library": "55"
         },
         "unknown": {
