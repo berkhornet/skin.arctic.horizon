@@ -19,29 +19,47 @@
     <include name="Home_Movement_UpDown">
         <onup condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(WidgetMovement,OnUp)</onup>
         <onup condition="!Skin.HasSetting(EnableHorizontalHome)">Control.Move(301,-1)</onup>
+        <onup condition="!Skin.HasSetting(EnableHorizontalHome)">ClearProperty(CurrentWidget,Home)</onup>
         <ondown condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(WidgetMovement,OnDown)</ondown>
         <ondown condition="!Skin.HasSetting(EnableHorizontalHome)">Control.Move(301,1)</ondown>
+        <ondown condition="!Skin.HasSetting(EnableHorizontalHome)">ClearProperty(CurrentWidget,Home)</ondown>
 
         <onleft condition="Skin.HasSetting(EnableHorizontalHome)">SetProperty(WidgetMovement,OnUp)</onleft>
         <onleft condition="Skin.HasSetting(EnableHorizontalHome)">Control.Move(301,-1)</onleft>
+        <onleft condition="Skin.HasSetting(EnableHorizontalHome)">ClearProperty(CurrentWidget,Home)</onleft>
         <onright condition="Skin.HasSetting(EnableHorizontalHome)">SetProperty(WidgetMovement,OnDown)</onright>
         <onright condition="Skin.HasSetting(EnableHorizontalHome)">Control.Move(301,1)</onright>
+        <onright condition="Skin.HasSetting(EnableHorizontalHome)">ClearProperty(CurrentWidget,Home)</onright>
     </include>
 
     <include name="Home_Movement_LeftRight">
-        <onright condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(3700).NumItems,0)">SetFocus(3000)</onright>
+        <!-- Towards Widgets -->
+        <!-- VMenu -->
+        <onright condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(3700).NumItems,0) + [String.IsEmpty(Window(Home).Property(CurrentWidget)) | !Skin.HasSetting(DisableSideSubmenu) | Integer.IsEqual(Window(Home).Property(CurrentWidget),3001)]">SetFocus(3000)</onright>
+        <onright condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(3700).NumItems,0) + !String.IsEmpty(Window(Home).Property(CurrentWidget)) + Skin.HasSetting(DisableSideSubmenu) + !Integer.IsEqual(Window(Home).Property(CurrentWidget),3001)">SetFocus($INFO[Window(Home).Property(CurrentWidget)],0,absolute)</onright>
+
+        <!-- HMenu -->
         <ondown condition="Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(3700).NumItems,0)">SetFocus(3000)</ondown>
+
+        <!-- Focus -->
         <include>skinshortcuts-template-onmovement</include>
         <onright condition="!Skin.HasSetting(EnableHorizontalHome)">ClearProperty(WidgetMovement)</onright>
         <ondown condition="Skin.HasSetting(EnableHorizontalHome)">ClearProperty(WidgetMovement)</ondown>
 
-        <!-- Submenu Move -->
+        <!-- SubMenu onInfo -->
         <oninfo condition="!Integer.IsEqual(Container(303).NumItems,0)">ClearProperty(WidgetFocus)</oninfo>
         <oninfo condition="!Integer.IsEqual(Container(303).NumItems,0)">SetFocus(303,0,absolute)</oninfo>
-        <onup condition="Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0)">ClearProperty(WidgetFocus)</onup>
-        <onup condition="Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0)">SetFocus(303,0,absolute)</onup>
-        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0)">ClearProperty(WidgetFocus)</onleft>
-        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0)">SetFocus(303,0,absolute)</onleft>
+
+        <!-- Towards Menu -->
+        <!-- HMenu -->
+        <onup condition="Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0) + !Skin.HasSetting(DisableSideSubmenu)">ClearProperty(WidgetFocus)</onup>
+        <onup condition="Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0) + !Skin.HasSetting(DisableSideSubmenu)">SetFocus(303,0,absolute)</onup>
+
+        <!-- VMenu -->
+        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(3700).NumItems,0) + !String.IsEmpty(Window(Home).Property(CurrentWidget)) + Skin.HasSetting(DisableSideSubmenu) + !Integer.IsEqual(Window(Home).Property(CurrentWidget),3001)">SetFocus($INFO[Window(Home).Property(CurrentWidget)],9999,absolute)</onleft>
+        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !String.IsEmpty(Window(Home).Property(CurrentWidget)) + Skin.HasSetting(DisableSideSubmenu) + Integer.IsEqual(Window(Home).Property(CurrentWidget),3001)">Control.Move(3001,-1)</onleft>
+        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0) + !Skin.HasSetting(DisableSideSubmenu)">ClearProperty(WidgetFocus)</onleft>
+        <onleft condition="!Skin.HasSetting(EnableHorizontalHome) + !Integer.IsEqual(Container(303).NumItems,0) + !Skin.HasSetting(DisableSideSubmenu)">SetFocus(303,0,absolute)</onleft>
     </include>
 
     <include name="Home_Movement_Widgets_Wrap">
@@ -560,16 +578,29 @@
                         <param name="plotheight-nr" value="120" />
                     </include>
                 </control>
-                <control type="image">
-                    <right>20</right>
-                    <bottom>-300</bottom>
-                    <height>80</height>
-                    <fadetime>200</fadetime>
-                    <aspectratio align="right" aligny="bottom">keep</aspectratio>
-                    <texture background="true">$VAR[Image_Home_Clearlogo]</texture>
-                    <visible>Control.HasFocus($PARAM[button-play-id]) | Control.HasFocus($PARAM[button-info-id]) | Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),3001) | $PARAM[clearlogo-visible]</visible>
+                <control type="group">
+                    <visible>Control.HasFocus($PARAM[button-play-id]) | Control.HasFocus($PARAM[button-info-id]) | Integer.IsEqual(Window(Home).Property(TMDbHelper.WidgetContainer),3001) | $PARAM[clearlogo-visible] | [Skin.HasSetting(EnableHorizontalHome) + Integer.IsEqual(Container(3700).NumItems,0)]</visible>
                     <animation reversible="false" effect="fade" start="100" end="0" delay="0" time="300" tween="cubic" easing="inout">Hidden</animation>
                     <animation reversible="false" effect="fade" start="0" end="100" delay="200" time="400" tween="cubic" easing="inout">Visible</animation>
+                    <control type="image">
+                        <right>20</right>
+                        <bottom>-260</bottom>
+                        <height>80</height>
+                        <fadetime>200</fadetime>
+                        <aspectratio align="right" aligny="bottom">keep</aspectratio>
+                        <texture background="true">$VAR[Image_Home_Clearlogo]</texture>
+                    </control>
+                    <control type="label">
+                        <right>20</right>
+                        <bottom>-300</bottom>
+                        <height>20</height>
+                        <fadetime>200</fadetime>
+                        <width>202</width>
+                        <align>center</align>
+                        <font>font_statusbar_bold</font>
+                        <label>$INFO[Container(3001).CurrentItem,, / ]$INFO[Container(3001).NumItems]</label>
+                        <textcolor>main_fg_70</textcolor>
+                    </control>
                 </control>
             </control>
             <control type="grouplist" id="$PARAM[group-id]" >
@@ -583,6 +614,7 @@
                 <itemgap>-10</itemgap>
                 <onup condition="Skin.HasSetting(EnableHorizontalHome)">301</onup>
                 <onleft condition="!Skin.HasSetting(EnableHorizontalHome)">301</onleft>
+                <onleft condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(CurrentWidget,3001)</onleft>
                 <onleft condition="Skin.HasSetting(EnableHorizontalHome)">$PARAM[button-play-id]</onleft>
                 <onleft condition="Skin.HasSetting(EnableHorizontalHome)">Control.Move(3001,-1)</onleft>
                 <onright>$PARAM[button-info-id]</onright>
@@ -942,9 +974,40 @@
                     <param name="showtitle" value="$PARAM[showtitle]" />
                     <param name="altid" value="$PARAM[altid]" />
                     <param name="showonupdate" value="$PARAM[showonupdate]" />
+                    <param name="spinner-visible" value="$PARAM[spinner-visible]" />
                 </include>
             </control>
         </definition>
+    </include>
+
+    <include name="Home_ListHub_Widget">
+        <control type="wraplist" id="$PARAM[id]">
+            <nested />
+            <right>0</right>
+            <bottom>0</bottom>
+            <height>560</height>
+            <width>996</width>
+            <onback>302</onback>
+            <onright>302</onright>
+            <onleft>302</onleft>
+            <orientation>vertical</orientation>
+            <onfocus condition="Skin.HasSetting(NoFanart)">SetProperty(TMDbHelper.Blur.SourceImage,Art(fallback),Home)</onfocus>
+            <onfocus condition="!Skin.HasSetting(NoFanart)">SetProperty(TMDbHelper.Blur.SourceImage,landscape,Home)</onfocus>
+            <animation effect="fade" start="100" end="0" time="300" condition="Container(5610).IsUpdating">Conditional</animation>
+            <include content="Defs_AutoScroll"><param name="condition" value="!Control.HasFocus(5610)" /></include>
+            <itemlayout width="996" height="560">
+                <control type="image">
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture background="true" diffuse="diffuse/landscape-big.png">$VAR[Image_Landscape]</texture>
+                </control>
+            </itemlayout>
+            <focusedlayout width="996" height="560">
+                <control type="image">
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture background="true" diffuse="diffuse/landscape-big.png">$VAR[Image_Landscape]</texture>
+                </control>
+            </focusedlayout>
+        </control>
     </include>
 
     <include name="Home_Menu_Header">

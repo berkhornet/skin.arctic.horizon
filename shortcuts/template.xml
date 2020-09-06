@@ -95,10 +95,13 @@
                         <onup condition="!Skin.HasSetting(EnableHorizontalHome) + Skin.HasSetting(DisableHomeWrap)">SetProperty(CG_$PYTHON[50000 + int(mainmenuid) * 100]_CurrentWidget,$INFO[System.CurrentControlID])</onup>
                         <onup condition="!Skin.HasSetting(EnableHorizontalHome) + Skin.HasSetting(DisableHomeWrap)">301</onup>
                         <ondown condition="!Skin.HasSetting(EnableHorizontalHome) + Skin.HasSetting(DisableHomeWrap)">SetFocus(3991)</ondown>
-                        <onright condition="!Skin.HasSetting(EnableHorizontalHome)">SetFocus(3990)</onright>
+                        <onright condition="!Skin.HasSetting(EnableHorizontalHome) + !Skin.HasSetting(DisableSideSubmenu)">SetFocus(3990)</onright>
+                        <onright condition="!Skin.HasSetting(EnableHorizontalHome) + Skin.HasSetting(DisableSideSubmenu)">301</onright>
+                        <onright condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(CurrentWidget,$INFO[System.CurrentControlID])</onright>
 
                         <!-- Movement to VMenu -->
                         <onleft condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(CG_$PYTHON[50000 + int(mainmenuid) * 100]_CurrentWidget,$INFO[System.CurrentControlID])</onleft>
+                        <onleft condition="!Skin.HasSetting(EnableHorizontalHome)">SetProperty(CurrentWidget,$INFO[System.CurrentControlID])</onleft>
                         <onleft condition="!Skin.HasSetting(EnableHorizontalHome)">301</onleft>
 
                         <!-- Wrap Movement for VMenu -->
@@ -240,6 +243,7 @@
             <property name="widgetInclude" tag="property" attribute="name|widgetAspect" value="Landscape">Viewtype_Landscape</property>
             <property name="widgetInclude" tag="property" attribute="name|widgetAspect" value="Small Landscape">Viewtype_Landscape</property>
             <property name="widgetInclude" tag="property" attribute="name|widgetAspect" value="Icon">Viewtype_Keywords</property>
+            <property name="widgetInclude" tag="property" attribute="name|widgetAspect" value="Lovefilm">Viewtype_Lovefilm</property>
             <property name="widgetInclude">Viewtype_Poster</property>
 
 
@@ -255,6 +259,7 @@
             <property name="widgetMovement" tag="property" attribute="name|list" value="Submenu">Defs_Movement_Square</property>
             <property name="widgetMovement" tag="property" attribute="name|widgetAspect" value="Landscape">Defs_Movement_Landscape</property>
             <property name="widgetMovement" tag="property" attribute="name|widgetAspect" value="Small Landscape">Defs_Movement_Landscape</property>
+            <property name="widgetMovement" tag="property" attribute="name|widgetAspect" value="Lovefilm">Defs_Movement_Lovefilm</property>
             <property name="widgetMovement">Defs_Movement_Poster</property>
 
             <!-- Widget Blur Source Artwork -->
@@ -262,6 +267,7 @@
             <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Square">thumb</property>
             <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Small Square">thumb</property>
             <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Landscape">landscape</property>
+            <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Lovefilm">landscape</property>
             <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Small Landscape">landscape</property>
             <property name="widgetSourceArt">poster</property>
 
@@ -300,6 +306,7 @@
             <!-- Widget Submenu Property -->
             <property name="widgetConstant" tag="property" attribute="name|list" value="Submenu">widgets_submenu</property>
             <property name="widgetConstant" tag="property" attribute="name|widgetAspect" value="Icon">widgets_submenu</property>
+            <property name="widgetConstant" tag="property" attribute="name|widgetAspect" value="Lovefilm">widgets_lovefilm</property>
             <property name="widgetConstant">widgets</property>
 
             <!-- Widget Height Property -->
@@ -408,6 +415,7 @@
                     <param name="clearart" value="$SKINSHORTCUTS[widgetInfo] | [$SKINSHORTCUTS[isSecondPosition] + String.IsEqual(Container(3700).ListItemAbsolute(0).Property(list),Background)]" />
                     <param name="control-type" value="fixedlist" />
                     <top>$SKINSHORTCUTS[widgetTop]</top>
+                    <onback>ClearProperty(CurrentWidget,Home)</onback>
                     <onback>SetFocus($PYTHON[30000 + int(mainmenuid) * 100 + 1])</onback>
                     <onback>301</onback>
                     <onfocus condition="!$SKINSHORTCUTS[widgetSubmenu]">SetProperty(TMDbHelper.WidgetContainer,$NUMBER[$PYTHON[30000 + int(mainmenuid) * 100 + int(id)]],Home)</onfocus>
@@ -466,6 +474,7 @@
                     <param name="id" value="$PYTHON[30000 + int(mainmenuid) * 100 + int(id)]" />
                     <description>Special Widget Control</description>
                     <include>Defs_Hidden_Button</include>
+                    <onback>ClearProperty(CurrentWidget,Home)</onback>
                     <onback>301</onback>
                     <onclick condition="!$SKINSHORTCUTS[isSettings]">ActivateWindow(Weather)</onclick>
                     <onfocus>ClearProperty(TMDbHelper.WidgetContainer,Home)</onfocus>
@@ -902,6 +911,7 @@
                 <orientation>horizontal</orientation>
                 <scrolltime tween="quadratic">400</scrolltime>
                 <preloaditems>2</preloaditems>
+                <pagecontrol>9988</pagecontrol>
                 <include>Animation_FadeInOut_Common</include>
                 <onfocus>SetProperty(TMDbHelper.WidgetContainer,3001,Home)</onfocus>
                 <visible>Integer.IsEqual(Container(3700).NumItems,0) | String.IsEqual(Container(3700).ListItemAbsolute(0).Property(list),Background)</visible>
@@ -1162,6 +1172,51 @@
                 <onfocus condition="!Skin.HasSetting(NoFanart)">SetProperty(TMDbHelper.Blur.SourceImage,$SKINSHORTCUTS[widgetSourceArt],Home)</onfocus>
                 <onfocus condition="Skin.HasSetting(NoFanart)">SetProperty(TMDbHelper.Blur.SourceImage,Art(fallback),Home)</onfocus>
                 <pagecontrol>60</pagecontrol>
+                <content target="$SKINSHORTCUTS[widgetTarget]" sortby="$SKINSHORTCUTS[widgetSortby]" sortorder="$SKINSHORTCUTS[widgetSortorder]">$SKINSHORTCUTS[widgetPath]</content>
+                <visible>String.IsEqual(Container(301).ListItem.Property(submenuVisibility),num-$SKINSHORTCUTS[submenuVisibility]) | String.IsEqual(Container(301).ListItem.Property(submenuVisibility),$SKINSHORTCUTS[submenuVisibility])</visible>
+                <visible>Integer.IsEqual(Container(302).ListItem.Property(id),$SKINSHORTCUTS[id])</visible>
+                <visible>!String.IsEmpty(Container(302).ListItem.Property(widgetPath))</visible>
+            </include>
+        </controls>
+    </submenuOther>
+
+
+    <other include="classicspotlight-mainmenu">
+        <property name="widgetTarget" tag="property" attribute="name|widgetTarget" />
+        <property name="widgetTarget">$VAR[Defs_ScreensaverWidget_Target]</property>
+        <property name="widgetName" tag="property" attribute="name|widgetName" />
+        <property name="widgetPath" tag="property" attribute="name|widgetPath" />
+        <property name="widgetPath">$VAR[Defs_ScreensaverWidget]</property>
+        <property name="widgetSortby" tag="property" attribute="name|widgetSortby" />
+        <property name="widgetSortorder" tag="property" attribute="name|widgetSortorder" />
+        <controls>
+            <include content="Home_ListHub_Widget">
+                <param name="id" value="5610" />
+                <content target="$SKINSHORTCUTS[widgetTarget]" sortby="$SKINSHORTCUTS[widgetSortby]" sortorder="$SKINSHORTCUTS[widgetSortorder]">$SKINSHORTCUTS[widgetPath]</content>
+                <skinshortcuts>visibility</skinshortcuts>
+                <visible>String.IsEmpty(Container(302).ListItem.Property(widgetPath))</visible>
+            </include>
+        </controls>
+    </other>
+
+    <submenuOther include="classicspotlight-submenu" container="302">
+        <property name="widgetTarget" tag="property" attribute="name|widgetTarget" />
+        <property name="widgetName" tag="property" attribute="name|widgetName" />
+        <property name="widgetPath" tag="property" attribute="name|widgetPath" />
+        <property name="submenuVisibility" tag="property" attribute="name|group" />
+        <property name="submenuVisibility">noMenu</property>
+        <property name="id" tag="property" attribute="name|id" />
+        <property name="widgetSortby" tag="property" attribute="name|widgetSortby" />
+        <property name="widgetSortorder" tag="property" attribute="name|widgetSortorder" />
+        <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Banner">Art(tvshow.banner)|Art(banner)|Art(fanart)</property>
+        <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Square">thumb</property>
+        <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Small Square">thumb</property>
+        <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Landscape">landscape</property>
+        <property name="widgetSourceArt" tag="property" attribute="name|widgetAspect" value="Small Landscape">landscape</property>
+        <property name="widgetSourceArt">poster</property>
+        <controls>
+            <include content="Home_ListHub_Widget">
+                <param name="id" value="5610" />
                 <content target="$SKINSHORTCUTS[widgetTarget]" sortby="$SKINSHORTCUTS[widgetSortby]" sortorder="$SKINSHORTCUTS[widgetSortorder]">$SKINSHORTCUTS[widgetPath]</content>
                 <visible>String.IsEqual(Container(301).ListItem.Property(submenuVisibility),num-$SKINSHORTCUTS[submenuVisibility]) | String.IsEqual(Container(301).ListItem.Property(submenuVisibility),$SKINSHORTCUTS[submenuVisibility])</visible>
                 <visible>Integer.IsEqual(Container(302).ListItem.Property(id),$SKINSHORTCUTS[id])</visible>
