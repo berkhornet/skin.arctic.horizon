@@ -5,8 +5,6 @@
     <thumbnailBrowseDefault>special://skin/extras/icons/</thumbnailBrowseDefault>
     <backgroundBrowse>True</backgroundBrowse>
     <widgetRename>True</widgetRename>
-    <widget label="8">Weather</widget>
-    <widget label="5">Settings</widget>
 
     <!-- Warning to Remove Settings -->
     <warn heading="31176" message="31177">ActivateWindow(Settings)</warn>
@@ -40,6 +38,16 @@
         <action>SetProperty(Hub.widgetName,$INFO[Container(301).ListItem.Property(widgetName)],Home)</action>
         <action>SetProperty(Hub.widgetAspect,$INFO[Container(301).ListItem.Property(widgetAspect)],Home)</action>
         <action>ActivateWindow(1150)</action>
+    </override>
+
+    <override action="ActivateWindow(1151)">
+        <action>SetProperty(Hub.Label,$INFO[Container(301).ListItem.Label],Home)</action>
+        <action>SetProperty(Hub.submenuVisibility,$INFO[Container(301).ListItem.Property(submenuVisibility)],Home)</action>
+        <action>SetProperty(Hub.widgetPath,$INFO[Container(301).ListItem.Property(widgetPath)],Home)</action>
+        <action>SetProperty(Hub.widgetTarget,$INFO[Container(301).ListItem.Property(widgetTarget)],Home)</action>
+        <action>SetProperty(Hub.widgetName,$INFO[Container(301).ListItem.Property(widgetName)],Home)</action>
+        <action>SetProperty(Hub.widgetAspect,$INFO[Container(301).ListItem.Property(widgetAspect)],Home)</action>
+        <action>ActivateWindow(1151)</action>
     </override>
 
     <override action="Skin.SetString(SearchTerm)">
@@ -79,12 +87,16 @@
 
 
     <!-- Properties -->
+    <property property="widgetInfo">True</property>
+    <propertySettings property="widgetInfo" buttonID="9916" title="Show Info With Widget" />
+
     <!-- Widget Aspect -->
     <property property="widgetAspect">Poster</property>
     <property property="widgetAspect">Square</property>
     <property property="widgetAspect">Landscape</property>
     <property property="widgetAspect">Banner</property>
     <property property="widgetAspect">Icon</property>
+    <property property="widgetAspect">Lovefilm</property>
     <propertySettings property="widgetAspect" buttonID="9901" title="Widget Aspect Ratio" />
     <propertySettings property="widgetAspect" buttonID="9911" title="Widget Aspect Ratio" />
 
@@ -279,15 +291,16 @@
     <groupings>
         <node label="32029">
             <content>common</content>
-            <shortcut label="$LOCALIZE[10821]" type="32021" icon="special://skin/extras/icons/games.png">ActivateWindow(Games)</shortcut>
+            <shortcut label="$LOCALIZE[10821]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/games.png">ActivateWindow(Games)</shortcut>
             <shortcut label="$LOCALIZE[137]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/search.png">Skin.SetString(SearchTerm)</shortcut>
             <shortcut label="$LOCALIZE[33060]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/power.png">ActivateWindow(shutdownmenu)</shortcut>
-            <shortcut label="$LOCALIZE[31246]" type="32021" icon="special://skin/extras/icons/playlist.png">SetFocus(303,0,absolute)</shortcut>
-            <shortcut label="$LOCALIZE[31429]" type="32021" icon="special://skin/extras/icons/compass.png">ActivateWindow(1110)</shortcut>
-            <shortcut label="$LOCALIZE[31247]" type="32021" icon="special://skin/extras/icons/globe.png">ActivateWindow(1150)</shortcut>
-            <shortcut label="$LOCALIZE[31045]" type="32021" icon="special://skin/extras/icons/chart.png">ActivateWindow(1139)</shortcut>
-            <shortcut label="$LOCALIZE[31048]" type="32021" icon="special://skin/extras/icons/antenna.png">ActivateWindow(1111)</shortcut>
-            <shortcut label="$LOCALIZE[31047]" type="32021" icon="special://skin/extras/icons/announce.png">ActivateWindow(1112)</shortcut>
+            <shortcut label="$LOCALIZE[31246]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/playlist.png">SetFocus(303,0,absolute)</shortcut>
+            <shortcut label="$LOCALIZE[31429]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/compass.png">ActivateWindow(1110)</shortcut>
+            <shortcut label="$LOCALIZE[31247]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/globe.png">ActivateWindow(1150)</shortcut>
+            <shortcut label="$LOCALIZE[31275]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/map.png">ActivateWindow(1151)</shortcut>
+            <shortcut label="$LOCALIZE[31045]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/chart.png">ActivateWindow(1139)</shortcut>
+            <shortcut label="$LOCALIZE[31048]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/antenna.png">ActivateWindow(1111)</shortcut>
+            <shortcut label="$LOCALIZE[31047]" type="$LOCALIZE[31018]" icon="special://skin/extras/icons/announce.png">ActivateWindow(1112)</shortcut>
             <shortcut label="$LOCALIZE[31017]" type="32010" icon="special://skin/extras/icons/shipping.png">||BROWSE||script.skin.helper.service/?action=smartshortcuts</shortcut>
         </node>
         <node label="32030">
@@ -439,6 +452,12 @@
 
     <!-- Widget Grouping -->
     <widget-groupings>
+        <node label="Special Widgets (home only)">
+            <shortcut widget="Background" label="Fullscreen Widget (must be first position)" icon="DefaultPicture.png" widgetTarget="video">Background</shortcut>
+            <shortcut widget="Submenu" label="Submenu" icon="DefaultPlaylist.png">Submenu</shortcut>
+            <shortcut widget="Weather" label="Weather (must be only widget in group)" icon="special://skin/extras/icons/sun.png" widgetTarget="video">Weather</shortcut>
+            <shortcut widget="Settings" label="Settings (must be only widget in group)" icon="special://skin/extras/icons/settings.png" widgetTarget="video">Settings</shortcut>
+        </node>
         <node label="$LOCALIZE[31183]">
             <node label="$LOCALIZE[342]">
                 <shortcut widget="NewMovies" label="$LOCALIZE[31185]" icon="DefaultRecentlyAddedMovies.png" widgetTarget="video">special://skin/extras/playlists/NewMovies.xsp</shortcut>
@@ -498,7 +517,6 @@
             </node>
             <node label="$LOCALIZE[29921]">
                 <content>widgets</content>
-                <shortcut widget="Submenu" label="Submenu" icon="DefaultPlaylist.png">Submenu</shortcut>
                 <shortcut widget="VideoSources" label="$LOCALIZE[31159]" icon="DefaultVideo.png" widgetTarget="video">sources://video/</shortcut>
                 <shortcut widget="MusicSources" label="$LOCALIZE[31302]" icon="DefaultMusicSongs.png" widgetTarget="music">sources://music/</shortcut>
                 <shortcut widget="PictureSources" label="$LOCALIZE[31304]" icon="DefaultPicture.png" widgetTarget="pictures">sources://pictures/</shortcut>

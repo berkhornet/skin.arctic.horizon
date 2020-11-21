@@ -27,7 +27,7 @@
             <control type="label">
                 <description>header label</description>
                 <include>Dialog_Standard_Header</include>
-                <label>Customize Widgets</label>
+                <label>$LOCALIZE[31043]</label>
                 <visible>[String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
             </control>
 
@@ -39,7 +39,7 @@
                     <left>0</left>
                     <width>500</width>
                     <control type="label">
-                        <label>Shortcuts</label>
+                        <label>$LOCALIZE[111]</label>
                         <top>0</top>
                         <include>Dialog_Standard_HintLabel</include>
                     </control>
@@ -240,7 +240,7 @@
                         </control>
 
                         <control type="button" id="4101" description="Choose Search Item">
-                            <label>Default search items</label>
+                            <label>$LOCALIZE[31050]</label>
                             <onclick>SetProperty(custom-grouping,customsearchdefaultitems)</onclick>
                             <onclick>SendClick(401)</onclick>
                             <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
@@ -276,18 +276,27 @@
                         <control type="button" id="310" description="Background">
                             <label>31110</label>
                             <label2>$INFO[Container(211).ListItem.Property(background)]</label2>
-                            <visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
+                            <!-- <visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible> -->
                             <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
                             <include>Dialog_Standard_Button</include>
                             <visible>![String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
                         </control>
 
                         <control type="button" id="406" description="Widgets">
-                            <label>$LOCALIZE[31099]</label>
+                            <label>$LOCALIZE[31099] - $LOCALIZE[10000]</label>
                             <visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
                             <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
                             <include>Dialog_Standard_Button</include>
                             <visible>![String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
+                        </control>
+
+                        <control type="button" id="9908" description="Hub Widget">
+                            <label>$LOCALIZE[31099] - $LOCALIZE[31081]</label>
+                            <label2>$INFO[Container(211).ListItem.Property(widgetName)]</label2>
+                            <onclick>SetFocus(9300)</onclick>
+                            <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
+                            <visible>![String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
+                            <include>Dialog_Standard_Button</include>
                         </control>
 
                         <control type="button" id="405" description="Submenu">
@@ -296,15 +305,6 @@
                             <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
                             <include>Dialog_Standard_Button</include>
                             <visible>![String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
-                        </control>
-
-                        <control type="button" id="9908" description="Hub Widget">
-                            <label>Hub widget</label>
-                            <label2>$INFO[Container(211).ListItem.Property(widgetName)]</label2>
-                            <onclick>SetFocus(9300)</onclick>
-                            <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
-                            <visible>![String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
-                            <include>Dialog_Standard_Button</include>
                         </control>
 
                         <control type="button" id="308" description="Reset">
@@ -328,6 +328,14 @@
                             <label2>$INFO[Container(211).ListItem.Property(widgetTarget)]</label2>
                             <visible>[String.EndsWith(Window.Property(groupname),.1) | String.IsEqual(Window.Property(groupname),searchmenu)]</visible>
                             <include>Dialog_Standard_Button</include>
+                        </control>
+
+                        <control type="button" id="9916" description="Display Info">
+                            <label>$LOCALIZE[31056]</label>
+                            <visible>!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)</visible>
+                            <label2>$INFO[Container(211).ListItem.Property(widgetInfo)]</label2>
+                            <include>Dialog_Standard_Button</include>
+                            <visible>String.EndsWith(Window.Property(groupname),.1)</visible>
                         </control>
 
                         <control type="button" id="9903" description="Sort by">
@@ -396,7 +404,7 @@
                     <control type="label">
                         <description>header label</description>
                         <include>Dialog_Standard_Header</include>
-                        <label>Customize Hub Widget</label>
+                        <label>$LOCALIZE[31058]</label>
                     </control>
 
                     <!-- Shortcuts List -->

@@ -1,55 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-
-    <include name="OSD_LeftSide"><left>view_pad</left></include>
-    <include name="OSD_RightSide"><right>view_pad</right></include>
-    <include name="OSD_Right340"><right>340</right></include>
-    <include name="OSD_Right580"><right>580</right></include>
-    <include name="OSD_Right0"><right>0</right></include>
-
-    <include name="OSD_Music_Info_Image_Circle">
-        <param name="artwork" default="Player.Art(albumartist.thumb)" />
-        <param name="fallback" default="DefaultArtist.png" />
-        <param name="side" default="OSD_RightSide" />
-        <definition>
-            <control type="group">
-                <include>$PARAM[side]</include>
-                <bottom>view_pad</bottom>
-                <width>218</width>
-                <height>218</height>
-                <control type="image">
-                    <right>-15</right>
-                    <bottom>-15</bottom>
-                    <left>-15</left>
-                    <top>-15</top>
-                    <bordersize>15</bordersize>
-                    <bordertexture colordiffuse="Shadow">diffuse/circle-shadow.png</bordertexture>
-                    <texture diffuse="diffuse/circle.png" colordiffuse="PosterBack">common/geometric.png</texture>
-                </control>
-                <control type="image">
-                    <right>-15</right>
-                    <bottom>-15</bottom>
-                    <left>-15</left>
-                    <top>-15</top>
-                    <bordersize>45</bordersize>
-                    <texture>$PARAM[fallback]</texture>
-                    <visible>String.IsEmpty($PARAM[artwork])</visible>
-                </control>
-                <control type="image">
-                    <right>-15</right>
-                    <bottom>-15</bottom>
-                    <left>-15</left>
-                    <top>-15</top>
-                    <bordersize>15</bordersize>
-                    <texture diffuse="diffuse/circle.png">$INFO[$PARAM[artwork]]</texture>
-                    <visible>!String.IsEmpty($PARAM[artwork])</visible>
-                </control>
-            </control>
-        </definition>
-    </include>
-
     <include name="OSD_Music_Info_Image_Square">
-        <param name="side" default="OSD_LeftSide" />
         <definition>
             <control type="group">
                 <centertop>50%</centertop>
@@ -92,7 +43,7 @@
                         <control type="group">
                             <width>800</width>
                             <centerleft>50%</centerleft>
-                            <bottom>80</bottom>
+                            <bottom>72</bottom>
                             <include>OSD_Progress_Bar</include>
                         </control>
                     </control>
@@ -125,26 +76,29 @@
         </definition>
     </include>
 
+    <include name="OSD_MusicMenuPosition">
+        <centertop>600</centertop>
+        <centerleft>1280</centerleft>
+    </include>
     <include name="OSD_VideoPosition">
         <align>center</align>
         <height>48</height>
-        <centerbottom>95</centerbottom>
-    </include>
-    <include name="OSD_LiveTVPosition">
-        <align>center</align>
-        <height>48</height>
-        <centerbottom>121</centerbottom>
-        <left>331</left>
-        <width>723</width>
-        <itemgap>36</itemgap>
+        <centerbottom>100</centerbottom>
+        <orientation>horizontal</orientation>
+        <usecontrolcoords>true</usecontrolcoords>
+        <itemgap>32</itemgap>
     </include>
     <include name="OSD_MusicPosition">
         <align>center</align>
         <height>48</height>
-        <centerbottom>95</centerbottom>
+        <centerbottom>165</centerbottom>
+        <itemgap>28</itemgap>
+        <orientation>horizontal</orientation>
+        <usecontrolcoords>true</usecontrolcoords>
     </include>
 
-    <include name="OSD_Video_Seekbar_Left"><left>330</left></include>
+    <include name="OSD_Video_Seekbar_Left"><left>360</left></include>
+    <include name="OSD_Video_Seekbar_Right"><right>360</right></include>
 
     <include name="OSD_Video_Seekbar">
         <control type="group">
@@ -159,73 +113,70 @@
                 <texture>common/dim-osd.png</texture>
             </control>
 
-            <!-- Large Info OSD -->
-            <control type="group">
-                <visible>!String.IsEmpty(Window(Home).Property(OSDInfo)) | Player.ShowInfo | Window.IsActive(DialogFullScreenInfo.xml) | [Skin.HasSetting(ShowInfoPaused) + [Player.Paused | Window.IsVisible(videoosd)]]</visible>
+            <!-- Overlay -->
+            <control type="image">
+                <bottom>0</bottom>
+                <top>0</top>
+                <texture>common/dim-gradient.png</texture>
+                <visible>Window.IsVisible(1143) | [$EXP[Exp_VideoOSD_LargeInfo] + !Skin.HasSetting(DisableOSDInfo)]</visible>
                 <visible>!Window.IsVisible(DialogPlayerProcessInfo.xml)</visible>
-                <visible>!Skin.HasSetting(DisableOSDInfo)</visible>
                 <include>Animation_FadeIn</include>
                 <include>Animation_FadeOut</include>
-                <!-- Overlay -->
-                <control type="image">
-                    <bottom>0</bottom>
-                    <top>0</top>
-                    <texture>common/dim-gradient.png</texture>
-                </control>
+            </control>
 
-
-
+            <!-- Large Info OSD -->
+            <control type="group">
+                <visible>$EXP[Exp_VideoOSD_LargeInfo]</visible>
+                <visible>!Skin.HasSetting(DisableOSDInfo)</visible>
+                <visible>!Window.IsVisible(DialogPlayerProcessInfo.xml)</visible>
+                <visible>!Window.IsVisible(1143)</visible>
+                <include>Animation_FadeIn</include>
+                <include>Animation_FadeOut</include>
                 <control type="group" description="info">
                     <left>view_pad</left>
                     <right>view_pad</right>
-                    <height>480</height>
-                    <bottom>190</bottom>
+                    <bottom>200</bottom>
+                    <!-- Artwork -->
                     <control type="group">
-                        <height>435</height>
+                        <!-- <right>0</right> -->
                         <bottom>0</bottom>
-                        <width>290</width>
-                        <control type="group">
+                        <width>320</width>
+                        <height>480</height>
+                        <control type="image">
                             <include content="Defs_Pad">
                                 <param name="pad" value="-20" />
                             </include>
-                            <control type="image">
-                                <bordersize>20</bordersize>
-                                <bordertexture border="30" colordiffuse="Shadow">common/shadow-20.png</bordertexture>
-                                <aspectratio scalediffuse="true" align="left" aligny="bottom">keep</aspectratio>
-                                <visible>!String.IsEmpty(Player.Art(poster)) | !String.IsEmpty(Player.Art(tvshow.poster))</visible>
-                                <texture background="true" diffuse="diffuse/poster-big.png">$VAR[Image_OSD_Artwork]</texture>
-                            </control>
+                            <bordersize>20</bordersize>
+                            <bordertexture border="30" colordiffuse="Shadow">common/shadow-20.png</bordertexture>
+                            <aspectratio scalediffuse="true" align="left" aligny="bottom">keep</aspectratio>
+                            <visible>!String.IsEmpty(Player.Art(poster)) | !String.IsEmpty(Player.Art(tvshow.poster)) | !String.IsEmpty(MusicPlayer.Cover)</visible>
+                            <texture background="true" diffuse="diffuse/poster-big.png">$VAR[Image_OSD_Artwork]</texture>
                         </control>
                     </control>
+                    <!-- Info -->
                     <control type="grouplist">
-                        <include condition="!String.IsEmpty(Player.Art(poster)) | !String.IsEmpty(Player.Art(tvshow.poster))">OSD_Video_Seekbar_Left</include>
+                        <include condition="!String.IsEmpty(Player.Art(poster)) | !String.IsEmpty(Player.Art(tvshow.poster)) | !String.IsEmpty(MusicPlayer.Cover)">OSD_Video_Seekbar_Left</include>
                         <usecontrolcoords>true</usecontrolcoords>
-                        <bottom>0</bottom>
+                        <bottom>-7</bottom>
                         <right>0</right>
                         <align>bottom</align>
-                        <control type="label">
-                            <top>25</top>
-                            <aligny>top</aligny>
-                            <height>100</height>
-                            <width>1430</width>
-                            <scroll>false</scroll>
-                            <font>font_title_large</font>
-                            <textcolor>panel_fg_100</textcolor>
-                            <label>$VAR[Label_OSD_Title]</label>
-                        </control>
+                        <itemgap>0</itemgap>
+                        <include content="Object_Info_Title">
+                            <param name="label" value="$VAR[Label_OSD_Title]" />
+                            <param name="textcolor" value="panel_fg_100" />
+                        </include>
+                        <include content="Object_Info_Line">
+                            <param name="label" value="$VAR[Label_56560_InfoLine]" />
+                            <param name="image" value="$VAR[Image_56560_VideoQuality]" />
+                            <param name="textcolor" value="panel_fg_100" />
+                        </include>
                         <control type="group">
-                            <top>-25</top>
-                            <height>58</height>
-                            <itemgap>0</itemgap>
-                            <left>0</left>
-                            <right>0</right>
-                            <include content="Object_Info_Line">
-                                <param name="label" value="$VAR[Label_56560_InfoLine]" />
-                                <param name="image" value="$VAR[Image_56560_VideoQuality]" />
-                                <param name="textcolor" value="panel_fg_100" />
-                            </include>
+                            <top>-42</top>
+                            <height>42</height>
                             <control type="grouplist">
-                                <top>-12</top>
+                                <left>-14</left>
+                                <height>64</height>
+                                <centertop>50%</centertop>
                                 <orientation>horizontal</orientation>
                                 <align>right</align>
                                 <itemgap>20</itemgap>
@@ -242,7 +193,7 @@
                                 <control type="image">
                                     <fadetime>100</fadetime>
                                     <centertop>50%</centertop>
-                                    <width>62</width>
+                                    <width>71</width>
                                     <height>56</height>
                                     <aspectratio align="left">keep</aspectratio>
                                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_RipSource]</texture>
@@ -254,6 +205,7 @@
                                     <height>42</height>
                                     <aspectratio>keep</aspectratio>
                                     <texture colordiffuse="panel_fg_100">flags/$VAR[Defs_ColorMode_Dir]/resolution/$INFO[VideoPlayer.VideoResolution,,.png]</texture>
+                                    <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
                                 </control>
                                 <control type="image">
                                     <fadetime>100</fadetime>
@@ -262,6 +214,7 @@
                                     <height>48</height>
                                     <aspectratio>keep</aspectratio>
                                     <texture colordiffuse="panel_fg_100">flags/$VAR[Defs_ColorMode_Dir]/source/$INFO[VideoPlayer.VideoCodec,,.png]</texture>
+                                    <visible>!String.IsEmpty(VideoPlayer.VideoCodec)</visible>
                                 </control>
                                 <control type="group">
                                     <width>71</width>
@@ -291,7 +244,6 @@
                                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_AudioCodec]</texture>
                                 </control>
                                 <control type="image">
-                                    <left>7</left>
                                     <fadetime>100</fadetime>
                                     <centertop>50%</centertop>
                                     <width>71</width>
@@ -311,72 +263,73 @@
                                 </control>
                             </control>
                         </control>
+
+                        <include content="Object_Info_Ratings" condition="!Skin.HasSetting(DisableAllRatings) + Skin.HasSetting(EnableOSDRatings)">
+                            <param name="userrating" value="VideoPlayer.UserRating" />
+                            <param name="starrating" value="VideoPlayer.Rating" />
+                            <param name="tmdbtype" value="Player" />
+                            <top>-20</top>
+                            <height>76</height>
+                            <visible>VideoPlayer.Content(movies) | VideoPlayer.Content(episodes)</visible>
+                        </include>
+
                         <control type="textbox">
-                            <aligny>top</aligny>
-                            <height max="128">auto</height>
-                            <width>100%</width>
+                            <top>15</top>
+                            <height max="125">auto</height>
                             <font>font_plotbox</font>
                             <textcolor>panel_fg_70</textcolor>
-                            <label>$INFO[VideoPlayer.Plot]</label>
-                            <visible>!String.IsEmpty(VideoPlayer.Plot)</visible>
+                            <label>$INFO[VideoPlayer.Plot,, ]$INFO[MusicPlayer.Property(Artist_Description),, ]$INFO[MusicPlayer.Property(Album_Description)]</label>
+                            <visible>!String.IsEmpty(VideoPlayer.Plot) | !String.IsEmpty(MusicPlayer.Property(Artist_Description)) | !String.IsEmpty(MusicPlayer.Property(Album_Description))</visible>
                         </control>
+
                     </control>
                 </control>
             </control>
 
             <!-- Small Info OSD -->
             <control type="group">
-                <visible>!String.IsEmpty(Window(Home).Property(OSDInfo)) | Player.ShowInfo | Window.IsActive(DialogFullScreenInfo.xml) | Skin.HasSetting(ShowInfoPaused)</visible>
+                <visible>$EXP[Exp_VideoOSD_SmallInfo]</visible>
                 <visible>!Window.IsVisible(DialogPlayerProcessInfo.xml)</visible>
-                <visible>Skin.HasSetting(DisableOSDInfo)</visible>
+                <visible>!Window.IsVisible(1143)</visible>
                 <include>Animation_FadeIn</include>
                 <include>Animation_FadeOut</include>
-
                 <control type="group" description="info">
                     <left>view_pad</left>
                     <right>view_pad</right>
-                    <height>480</height>
-                    <bottom>170</bottom>
+                    <bottom>200</bottom>
+                    <!-- Info -->
                     <control type="grouplist">
-                        <left>0</left>
                         <usecontrolcoords>true</usecontrolcoords>
-                        <bottom>0</bottom>
+                        <bottom>-7</bottom>
                         <right>0</right>
                         <align>bottom</align>
-                        <control type="label">
-                            <top>25</top>
-                            <aligny>top</aligny>
-                            <height>100</height>
-                            <width>1430</width>
-                            <scroll>false</scroll>
-                            <font>font_title_large</font>
-                            <textcolor>panel_fg_100</textcolor>
-                            <label>$VAR[Label_OSD_Title]</label>
-                        </control>
-                        <control type="group">
-                            <top>-25</top>
-                            <height>58</height>
-                            <itemgap>0</itemgap>
-                            <left>0</left>
-                            <right>0</right>
-                            <include content="Object_Info_Line">
-                                <param name="label" value="$VAR[Label_56560_InfoLine]" />
-                                <param name="image" value="$VAR[Image_56560_VideoQuality]" />
-                                <param name="textcolor" value="panel_fg_100" />
-                            </include>
-                        </control>
+                        <itemgap>0</itemgap>
+                        <include content="Object_Info_Title">
+                            <param name="label" value="$VAR[Label_OSD_Title]" />
+                            <param name="textcolor" value="panel_fg_100" />
+                        </include>
+                        <include content="Object_Info_Line">
+                            <param name="label" value="$VAR[Label_56560_InfoLine]" />
+                            <param name="image" value="$VAR[Image_56560_VideoQuality]" />
+                            <param name="textcolor" value="panel_fg_100" />
+                        </include>
                     </control>
                 </control>
             </control>
             <include>OSD_Clock</include>
             <include>OSD_Progress_Text</include>
             <include>OSD_Progress_Bar</include>
-
-
         </control>
     </include>
 
-     <include name="OSD_Menubar_Items">
+    <variable name="OSD_Cast">
+        <value condition="VideoPlayer.Content(movies) + !String.IsEmpty(VideoPlayer.IMDBNumber) + String.StartsWith(VideoPlayer.IMDBNumber,tt)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;type=movie&amp;imdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+        <value condition="VideoPlayer.Content(movies) + !String.IsEmpty(VideoPlayer.IMDBNumber)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;type=movie&amp;tmdb_id=$INFO[VideoPlayer.IMDBNumber]</value>
+        <value condition="VideoPlayer.Content(movies)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;type=movie&amp;query=$INFO[Player.Title]</value>
+        <value condition="VideoPlayer.Content(episodes)">plugin://plugin.video.themoviedb.helper/?info=cast&amp;type=tv&amp;query=$INFO[VideoPlayer.TVShowTitle]&amp;season=$INFO[VideoPlayer.Season]&amp;episode=$INFO[VideoPlayer.Episode]</value>
+    </variable>
+
+    <include name="OSD_Menubar_Items">
         <font>font_small</font>
         <textcolor>panel_fg_100</textcolor>
         <aligny>center</aligny>
@@ -414,8 +367,8 @@
 
         <!-- Progress Text -->
         <control type="group">
-            <centerbottom>95</centerbottom>
-            <height>30</height>
+            <bottom>view_pad</bottom>
+            <height>item_list_height_half</height>
             <left>view_pad</left>
             <right>view_pad</right>
             <control type="label">
@@ -433,7 +386,8 @@
                     <scroll>true</scroll>
                     <textcolor>$VAR[ColorHighlight]</textcolor>
                     <include>OSD_Menubar_Items</include>
-                    <label>$INFO[VideoPlayer.TvShowTitle,[COLOR=panel_fg_100],[/COLOR]  •  ]$INFO[MusicPlayer.Artist,[COLOR=panel_fg_100],[/COLOR]  •  ]$INFO[VideoPlayer.Season,[COLOR=panel_fg_100],x[/COLOR]]$INFO[VideoPlayer.Episode,[COLOR=panel_fg_100],. [/COLOR]]$INFO[Player.Title,[COLOR=panel_fg_100],[/COLOR]]$VAR[Label_OSD_FinishTime,  •  [COLOR=panel_fg_100]Finishes at ,[/COLOR]]</label>
+                    <label>$VAR[Label_OSD_FinishTime,[COLOR=panel_fg_100]$LOCALIZE[31002] ,[/COLOR]]</label>
+                    <!-- <label>$INFO[VideoPlayer.TvShowTitle,[COLOR=panel_fg_100],[/COLOR]  •  ]$INFO[MusicPlayer.Artist,[COLOR=panel_fg_100],[/COLOR]  •  ]$INFO[VideoPlayer.Season,[COLOR=panel_fg_100],x[/COLOR]]$INFO[VideoPlayer.Episode,[COLOR=panel_fg_100],. [/COLOR]]$INFO[Player.Title,[COLOR=panel_fg_100],[/COLOR]]$VAR[Label_OSD_FinishTime,  •  [COLOR=panel_fg_100]Finishes at ,[/COLOR]]</label> -->
                     <animation effect="fade" end="100" start="0" delay="300" time="1" reversible="false">Visible</animation>
                 </control>
             </control>
@@ -466,15 +420,16 @@
             <height>12</height>
             <left>view_pad</left>
             <right>view_pad</right>
-            <bottom>140</bottom>
+            <bottom>148</bottom>
+            <!-- <centerbottom>160</centerbottom> -->
             <control type="progress" description="cache">
                 <width>100%</width>
                 <height>12</height>
                 <info>Player.ProgressCache</info>
-                <texturebg colordiffuse="00ffffff" border="4">diffuse/progress-bg.png</texturebg>
-                <lefttexture colordiffuse="main_fg_12" border="4">diffuse/progress-left.png</lefttexture>
-                <midtexture colordiffuse="main_fg_12" border="4">diffuse/progress-end.png</midtexture>
-                <righttexture colordiffuse="main_fg_12" border="4">diffuse/progress-right.png</righttexture>
+                <texturebg colordiffuse="00ffffff" border="6">diffuse/progress-bg.png</texturebg>
+                <lefttexture colordiffuse="main_fg_12" border="6">diffuse/progress-left.png</lefttexture>
+                <midtexture colordiffuse="main_fg_12" border="6">diffuse/progress-end.png</midtexture>
+                <righttexture colordiffuse="main_fg_12" border="6">diffuse/progress-right.png</righttexture>
                 <visible>Player.Playing | Player.Paused | Player.Caching</visible>
                 <visible>!Player.Seeking</visible>
                 <visible>Player.HasMedia</visible>
@@ -493,10 +448,10 @@
                 <height>12</height>
 
                 <info>Player.Progress</info>
-                <texturebg colordiffuse="00ffffff" border="4">diffuse/progress-bg.png</texturebg>
-                <lefttexture colordiffuse="00ffffff" border="4">diffuse/progress-left.png</lefttexture>
-                <midtexture colordiffuse="$VAR[ColorGradient]" border="4" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
-                <righttexture colordiffuse="$VAR[ColorGradient]" border="4" diffuse="progress/diffuse-end.png">diffuse/progress-right.png</righttexture>
+                <texturebg colordiffuse="00ffffff" border="6">diffuse/progress-bg.png</texturebg>
+                <lefttexture colordiffuse="00ffffff" border="6">diffuse/progress-left.png</lefttexture>
+                <midtexture colordiffuse="$VAR[ColorGradient]" border="6" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
+                <righttexture colordiffuse="$VAR[ColorGradient]" border="6" diffuse="progress/diffuse-end.png">diffuse/progress-right.png</righttexture>
                 <include content="Defs_Progress_Colorfade">
                     <param name="id" value="499" />
                 </include>
@@ -516,10 +471,10 @@
                 <height>12</height>
 
                 <info>PVR.EpgEventProgress</info>
-                <texturebg colordiffuse="00ffffff" border="4">diffuse/progress-bg.png</texturebg>
-                <lefttexture colordiffuse="00ffffff" border="4">diffuse/progress-left.png</lefttexture>
-                <midtexture colordiffuse="$VAR[ColorGradient]" border="4" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
-                <righttexture colordiffuse="$VAR[ColorGradient]" border="4" diffuse="progress/diffuse-end.png">diffuse/progress-right.png</righttexture>
+                <texturebg colordiffuse="00ffffff" border="6">diffuse/progress-bg.png</texturebg>
+                <lefttexture colordiffuse="00ffffff" border="6">diffuse/progress-left.png</lefttexture>
+                <midtexture colordiffuse="$VAR[ColorGradient]" border="6" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
+                <righttexture colordiffuse="$VAR[ColorGradient]" border="6" diffuse="progress/diffuse-end.png">diffuse/progress-right.png</righttexture>
                 <include content="Defs_Progress_Colorfade">
                     <param name="id" value="498" />
                 </include>
@@ -533,10 +488,10 @@
                 <visible>Player.HasMedia</visible>
                 <animation effect="fade" start="100" end="0" condition="!Player.Seeking" reversible="false" delay="300" time="0">Conditional</animation>
                 <animation effect="fade" start="0" end="100" condition="Player.Seeking" reversible="false" time="0">Conditional</animation>
-                <texturebg colordiffuse="00ffffff" border="4">diffuse/progress-bg.png</texturebg>
-                <lefttexture colordiffuse="00ffffff" border="4">diffuse/progress-left.png</lefttexture>
-                <midtexture colordiffuse="00ffffff" border="4" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
-                <righttexture colordiffuse="panel_fg_100" border="4" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</righttexture>
+                <texturebg colordiffuse="00ffffff" border="6">diffuse/progress-bg.png</texturebg>
+                <lefttexture colordiffuse="00ffffff" border="6">diffuse/progress-left.png</lefttexture>
+                <midtexture colordiffuse="00ffffff" border="6" diffuse="progress/diffuse.png">diffuse/progress-end.png</midtexture>
+                <righttexture colordiffuse="panel_fg_100" border="6" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</righttexture>
                 <visible>Player.SeekEnabled + !Pvr.IsPlayingTv + !Player.ChannelPreviewActive</visible>
             </control>
 
@@ -547,9 +502,9 @@
                 <visible>Player.HasMedia</visible>
                 <animation effect="fade" start="100" end="0" condition="!Player.Seeking" reversible="false" delay="300" time="0">Conditional</animation>
                 <animation effect="fade" start="0" end="100" condition="Player.Seeking" reversible="false" time="0">Conditional</animation>
-                <texturesliderbar colordiffuse="00ffffff" border="4">diffuse/progress-bg.png</texturesliderbar>
-                <textureslidernib colordiffuse="panel_fg_100" border="4" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</textureslidernib>
-                <textureslidernibfocus colordiffuse="panel_fg_100" border="4" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</textureslidernibfocus>
+                <texturesliderbar colordiffuse="00ffffff" border="6">diffuse/progress-bg.png</texturesliderbar>
+                <textureslidernib colordiffuse="panel_fg_100" border="6" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</textureslidernib>
+                <textureslidernibfocus colordiffuse="panel_fg_100" border="6" diffuse="progress/diffuse-end.png">diffuse/progress-nib.png</textureslidernibfocus>
                 <visible>Player.SeekEnabled + Pvr.IsPlayingTv + !Player.ChannelPreviewActive</visible>
             </control>
         </control>
@@ -757,7 +712,7 @@
             <texturefocus colordiffuse="$VAR[ColorHighlight]">osd/repeat-off.png</texturefocus>
             <texturenofocus colordiffuse="panel_fg_70">osd/repeat-off.png</texturenofocus>
             <include>OSD_Button_OnFocus</include>
-            <onclick>XBMC.PlayerControl(Repeat)</onclick>
+            <onclick>PlayerControl(Repeat)</onclick>
             <visible>Window.IsVisible(musicosd)</visible>
             <visible>!Playlist.IsRepeatOne + !Playlist.IsRepeat</visible>
         </control>
@@ -774,7 +729,7 @@
             <texturefocus colordiffuse="$VAR[ColorHighlight]">osd/repeat-one.png</texturefocus>
             <texturenofocus colordiffuse="panel_fg_70">osd/repeat-one.png</texturenofocus>
             <include>OSD_Button_OnFocus</include>
-            <onclick>XBMC.PlayerControl(Repeat)</onclick>
+            <onclick>PlayerControl(Repeat)</onclick>
             <visible>Window.IsVisible(musicosd)</visible>
             <visible>Playlist.IsRepeatOne</visible>
         </control>
@@ -791,7 +746,7 @@
             <texturefocus colordiffuse="$VAR[ColorHighlight]">osd/repeat-all.png</texturefocus>
             <texturenofocus colordiffuse="panel_fg_70">osd/repeat-all.png</texturenofocus>
             <include>OSD_Button_OnFocus</include>
-            <onclick>XBMC.PlayerControl(Repeat)</onclick>
+            <onclick>PlayerControl(Repeat)</onclick>
             <visible>Window.IsVisible(musicosd)</visible>
             <visible>Playlist.IsRepeat</visible>
         </control>
@@ -808,7 +763,7 @@
             <alttexturefocus colordiffuse="$VAR[ColorHighlight]">osd/shuffle-on.png</alttexturefocus>
             <alttexturenofocus colordiffuse="panel_fg_70">osd/shuffle-on.png</alttexturenofocus>
             <include>OSD_Button_OnFocus</include>
-            <onclick>XBMC.PlayerControl(Random)</onclick>
+            <onclick>PlayerControl(Random)</onclick>
             <visible>Window.IsVisible(musicosd)</visible>
         </control>
         <!-- <control type="button" id="24">

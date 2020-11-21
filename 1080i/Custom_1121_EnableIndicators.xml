@@ -7,7 +7,7 @@
         <control type="group">
             <include content="Dialog_Standard_Group">
                 <param name="width" value="1200" />
-                <param name="height" value="790" />
+                <param name="height" value="870" />
                 <param name="centertop" value="595" />
             </include>
 
@@ -35,13 +35,23 @@
                 <pagecontrol>61</pagecontrol>
                 <orientation>vertical</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
-                <control type="radiobutton" id="9099">
+                <control type="button" id="9099">
+                    <label>$LOCALIZE[31180]</label>
+                    <radioposx>730</radioposx>
+                    <include>Dialog_Standard_Button</include>
+                    <label2>$INFO[Skin.String(watchedprogresscolor.name)]</label2>
+                    <onclick>SetProperty(colorpick,Watched,Home)</onclick>
+                    <onclick>ActivateWindow(1117)</onclick>
+                    <enable>!Skin.HasSetting(EnableClassicIndicators) + !Skin.HasSetting(DisableWatchedOverlay)</enable>
+                </control>
+                <control type="radiobutton" id="9098">
                     <label>$LOCALIZE[31083]</label>
                     <radioposx>730</radioposx>
                     <include>Dialog_Standard_Button</include>
                     <onclick>Skin.ToggleSetting(DisableWatchedOverlay)</onclick>
                     <selected>Skin.HasSetting(DisableWatchedOverlay)</selected>
                 </control>
+
                 <control type="radiobutton" id="9001">
                     <label>$LOCALIZE[31151]</label>
                     <radioposx>730</radioposx>
@@ -55,7 +65,7 @@
                     <param name="id" value="9002" />
                     <param name="ondown" value="9003" />
                     <param name="group-id" value="9102" />
-                    <param name="label" value="Recently added" />
+                    <param name="label" value="$LOCALIZE[20382]" />
                     <param name="icon" value="indicator/new-fo.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.New)" />
@@ -66,7 +76,7 @@
                     <param name="id" value="9003" />
                     <param name="ondown" value="9004" />
                     <param name="group-id" value="9103" />
-                    <param name="label" value="Unwatched episodes" />
+                    <param name="label" value="$LOCALIZE[31283]" />
                     <param name="icon" value="indicator/unwatched.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.Episodes)" />
@@ -77,7 +87,7 @@
                     <param name="id" value="9004" />
                     <param name="ondown" value="9005" />
                     <param name="group-id" value="9104" />
-                    <param name="label" value="Watched" />
+                    <param name="label" value="$LOCALIZE[16102]" />
                     <param name="icon" value="indicator/checkmark-fo.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.Watched)" />
@@ -88,7 +98,7 @@
                     <param name="id" value="9005" />
                     <param name="ondown" value="9006" />
                     <param name="group-id" value="9105" />
-                    <param name="label" value="In-progress" />
+                    <param name="label" value="$LOCALIZE[31210]" />
                     <param name="icon" value="indicator/inprogress-75.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.Progress)" />
@@ -99,7 +109,7 @@
                     <param name="id" value="9006" />
                     <param name="ondown" value="9007" />
                     <param name="group-id" value="9106" />
-                    <param name="label" value="Library" />
+                    <param name="label" value="$LOCALIZE[14022]" />
                     <param name="icon" value="indicator/library.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.Library)" />
@@ -108,9 +118,9 @@
                 <include content="Dialog_Indicators_RadioButton">
                     <param name="onup" value="9006" />
                     <param name="id" value="9007" />
-                    <param name="ondown" value="9001" />
+                    <param name="ondown" value="9099" />
                     <param name="group-id" value="9107" />
-                    <param name="label" value="Movie set" />
+                    <param name="label" value="$LOCALIZE[20457]" />
                     <param name="icon" value="indicator/movieset.png" />
                     <param name="enable" value="!Skin.HasSetting(DisableWatchedOverlay)" />
                     <param name="onclick" value="Skin.ToggleSetting(DisableIndicator.MovieSet)" />

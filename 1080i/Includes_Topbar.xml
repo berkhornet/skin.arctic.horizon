@@ -7,7 +7,7 @@
     <include name="Topbar_Left">
         <param name="fgcolor" default="main_fg" />
         <param name="label" default="$VAR[Label_Header_Content]" />
-        <param name="visible" default="!$EXP[Exp_InfoActive]" />
+        <param name="visible" default="!$EXP[Exp_InfoActive] + !$EXP[Exp_ShowPlotOverlay]" />
         <definition>
             <control type="group">
                 <top>view_pad</top>
@@ -44,7 +44,7 @@
                 <visible>!Window.IsVisible(DialogVolumeBar.xml) | Player.Muted</visible>
                 <visible>!Player.HasMedia | Window.IsVisible(fullscreenvideo)</visible>
                 <control type="grouplist">
-                    <visible>!Control.HasFocus(60) + !Control.HasFocus(64)</visible>
+                    <visible>[!Control.HasFocus(60) + !Control.HasFocus(64)] | String.IsEmpty(Container.NumItems)</visible>
                     <right>view_pad</right>
                     <align>right</align>
                     <orientation>horizontal</orientation>
@@ -89,7 +89,7 @@
                     </control>
                 </control>
                 <control type="grouplist">
-                    <visible>Control.HasFocus(60) | Control.HasFocus(64)</visible>
+                    <visible>[Control.HasFocus(60) | Control.HasFocus(64)] + !String.IsEmpty(Container.NumItems)</visible>
                     <right>view_pad</right>
                     <align>right</align>
                     <orientation>horizontal</orientation>

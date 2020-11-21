@@ -127,7 +127,6 @@
                     <onleft>9000</onleft>
                     <onup>9999</onup>
                     <ondown>9999</ondown>
-                    <pagecontrol>61</pagecontrol>
                     <usecontrolcoords>true</usecontrolcoords>
                     <!-- ==== -->
                     <!-- Home -->
@@ -143,19 +142,59 @@
                         <label>$LOCALIZE[31109]</label>
                         <onclick>RunScript(script.skinshortcuts,type=manage&amp;group=mainmenu)</onclick>
                     </control>
+                    <control type="button" id="19120" description="Orientation">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>$LOCALIZE[31060]</label>
+                        <label2>$VAR[Label_SkinSettings_HomeStyle]</label2>
+                        <onclick>Skin.ToggleSetting(EnableHorizontalHome)</onclick>
+                    </control>
+                    <control type="radiobutton" id="19121" description="Iconic Horizontal Menu">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>- $LOCALIZE[31294]</label>
+                        <selected>Skin.HasSetting(HomeIconicMenu)</selected>
+                        <onclick>Skin.ToggleSetting(HomeIconicMenu)</onclick>
+                        <onclick>ReloadSkin()</onclick>
+                        <onclick>SetFocus(19121)</onclick>
+                        <visible>Skin.HasSetting(EnableHorizontalHome)</visible>
+                    </control>
+                    <control type="radiobutton" id="19109" description="Invert Main Menu Colors">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>- $LOCALIZE[31042]</label>
+                        <selected>Skin.HasSetting(InvertHomeMenuColors)</selected>
+                        <onclick>Skin.ToggleSetting(InvertHomeMenuColors)</onclick>
+                        <visible>!Skin.HasSetting(EnableHorizontalHome)</visible>
+                    </control>
+                    <control type="radiobutton" id="19107" description="Lock main menu">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>- $LOCALIZE[31035]</label>
+                        <selected>Skin.HasSetting(LockMainMenu)</selected>
+                        <onclick>Skin.ToggleSetting(LockMainMenu)</onclick>
+                    </control>
+                    <control type="radiobutton" id="19108" description="Profile Pic">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>- $LOCALIZE[31029]</label>
+                        <selected>Skin.HasSetting(ProfilePicture)</selected>
+                        <onclick>Skin.ToggleSetting(ProfilePicture)</onclick>
+                    </control>
+                    <control type="radiobutton" id="19111" description="Submenu">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>- $LOCALIZE[31298]</label>
+                        <selected>!Skin.HasSetting(DisableSideSubmenu)</selected>
+                        <onclick>Skin.ToggleSetting(DisableSideSubmenu)</onclick>
+                    </control>
+
                     <control type="button" id="19103" description="Global Widget">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
                         <include>Defs_Settings_Button</include>
                         <label>$LOCALIZE[31113]</label>
                         <label2>$INFO[Skin.String(screensaver.arctic.mirage.path)]</label2>
                         <onclick>RunScript(script.skinshortcuts,type=widgets&amp;showNone=True&amp;skinWidgetName=screensaver.arctic.mirage.name&amp;skinWidgetTarget=screensaver.arctic.mirage.target&amp;skinWidgetPath=screensaver.arctic.mirage.path)</onclick>
-                    </control>
-                    <control type="radiobutton" id="19104" description="Fullscreen Widget Option">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
-                        <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31024]</label>
-                        <selected>Skin.HasSetting(FullscreenWidgetShowcase)</selected>
-                        <onclick>Skin.ToggleSetting(FullscreenWidgetShowcase)</onclick>
                     </control>
                     <control type="radiobutton" id="19105" description="Autoscroll Widgets">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
@@ -171,27 +210,7 @@
                         <selected>Skin.HasSetting(EnableShowMore)</selected>
                         <onclick>Skin.ToggleSetting(EnableShowMore)</onclick>
                     </control>
-                    <control type="radiobutton" id="19107" description="Lock main menu">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
-                        <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31035]</label>
-                        <selected>Skin.HasSetting(LockMainMenu)</selected>
-                        <onclick>Skin.ToggleSetting(LockMainMenu)</onclick>
-                    </control>
-                    <control type="radiobutton" id="19108" description="Profile Pic">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
-                        <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31029]</label>
-                        <selected>Skin.HasSetting(ProfilePicture)</selected>
-                        <onclick>Skin.ToggleSetting(ProfilePicture)</onclick>
-                    </control>
-                    <control type="radiobutton" id="19109" description="Invert Main Menu Colors">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
-                        <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31042]</label>
-                        <selected>Skin.HasSetting(InvertHomeMenuColors)</selected>
-                        <onclick>Skin.ToggleSetting(InvertHomeMenuColors)</onclick>
-                    </control>
+
                     <control type="radiobutton" id="19110" description="Auto width hub buttons">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9001)</visible>
                         <include>Defs_Settings_Button</include>
@@ -230,7 +249,7 @@
                     <control type="radiobutton" id="19204" description="Blur background fanart">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9002)</visible>
                         <include>Defs_Settings_Button</include>
-                        <label>Background style</label>
+                        <label>$LOCALIZE[31063]</label>
                         <label2>$VAR[Label_Setting_BackgroundStyle]</label2>
                         <include>Defs_RadioButton_NoTexture</include>
                         <onclick condition="!Skin.HasSetting(DisableBlur)">Skin.SetBool(DisableBlur)</onclick>
@@ -253,7 +272,9 @@
                         <include>Defs_Settings_Button</include>
                         <label>$LOCALIZE[31239]</label>
                         <label2>$VAR[Label_BusyWaves]</label2>
-                        <onclick>Skin.ToggleSetting(DisableBusyBackground)</onclick>
+                        <onclick condition="System.HasAddon(resource.images.arctic.waves)">Skin.ToggleSetting(DisableBusyBackground)</onclick>
+                        <onclick condition="!System.HasAddon(resource.images.arctic.waves)">Skin.Reset(DisableBusyBackground)</onclick>
+                        <onclick condition="!System.HasAddon(resource.images.arctic.waves)">InstallAddon(resource.images.arctic.waves)</onclick>
                     </control>
 
 
@@ -265,12 +286,22 @@
                     <control type="button" id="19208" description="Shadowlines">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9002)</visible>
                         <include>Defs_Settings_Button</include>
-                        <label>Divider style</label>
+                        <label>$LOCALIZE[31024]</label>
                         <label2>$VAR[Label_Setting_DividerStyle]</label2>
+
+                        <!-- Reset Back to Default Flat Setting -->
                         <onclick condition="Skin.HasSetting(DisablePanelDivider)">Skin.Reset(DisablePanelDivider)</onclick>
-                        <onclick condition="!Skin.HasSetting(DisablePanelDivider)">Skin.ToggleSetting(ShadowLines)</onclick>
-                        <onclick condition="Skin.HasSetting(ShadowLines)">Skin.SetBool(DisablePanelDivider)</onclick>
-                        <onclick condition="Skin.HasSetting(ShadowLines)">Skin.Reset(ShadowLines)</onclick>
+                        <onclick condition="Skin.HasSetting(DisablePanelDivider)">Skin.Reset(ShadowLines)</onclick>
+                        <onclick condition="Skin.HasSetting(DisablePanelDivider)">Skin.Reset(OpaqueDivider)</onclick>
+
+                        <!-- Turn on Shadow -->
+                        <onclick condition="!Skin.HasSetting(DisablePanelDivider) + !Skin.HasSetting(ShadowLines)">Skin.SetBool(ShadowLines)</onclick>
+
+                        <!-- Turn on Opaque -->
+                        <onclick condition="!Skin.HasSetting(DisablePanelDivider) + Skin.HasSetting(ShadowLines) + !Skin.HasSetting(OpaqueDivider)">Skin.SetBool(OpaqueDivider)</onclick>
+
+                        <!-- Turn off Divider -->
+                        <onclick condition="!Skin.HasSetting(DisablePanelDivider) + Skin.HasSetting(ShadowLines) + Skin.HasSetting(OpaqueDivider)">Skin.SetBool(DisablePanelDivider)</onclick>
                     </control>
                     <control type="radiobutton" id="19209">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9002)</visible>
@@ -287,7 +318,7 @@
                     <control type="label" id="19301" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>Colours</label>
+                        <label>$LOCALIZE[14078]</label>
                     </control>
                     <control type="button" id="19302" description="Color Highlight">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
@@ -313,7 +344,7 @@
                     <control type="label" id="19304" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>Furniture</label>
+                        <label>$LOCALIZE[31030]</label>
                     </control>
                     <control type="radiobutton" id="19305" description="Color Mode">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
@@ -324,11 +355,12 @@
                         <selected>!Skin.HasSetting(EnableMonochromeFlags)</selected>
                         <onclick>Skin.ToggleSetting(EnableMonochromeFlags)</onclick>
                     </control>
-                    <control type="button" id="19306" description="Ratings">
+                    <control type="radiobutton" id="19306" description="Ratings">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
                         <include>Defs_Settings_Button</include>
                         <label>$LOCALIZE[31116]</label>
                         <onclick>ActivateWindow(1118)</onclick>
+                        <selected>Skin.HasSetting(TMDbHelper.Service) + !Skin.HasSetting(DisableAllRatings)</selected>
                     </control>
                     <control type="radiobutton" id="19307" description="Clock Weather">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9003)</visible>
@@ -361,7 +393,7 @@
                     <control type="label" id="19401" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9004)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>List Items</label>
+                        <label>$LOCALIZE[31138]</label>
                     </control>
                     <control type="button" id="19402" description="Disable watched indicators">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9004)</visible>
@@ -395,7 +427,7 @@
                     <control type="label" id="19406" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9004)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>Viewtypes</label>
+                        <label>$LOCALIZE[31152]</label>
                     </control>
                     <control type="button" id="19407">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9004)</visible>
@@ -409,15 +441,6 @@
                         <include>Defs_Settings_Button</include>
                         <onclick>Skin.ToggleSetting(DisableWallScroll)</onclick>
                         <selected>!Skin.HasSetting(DisableWallScroll)</selected>
-                    </control>
-
-                    <control type="radiobutton" id="19409">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9004)</visible>
-                        <label>$LOCALIZE[31063]</label>
-                        <include>Defs_Settings_Button</include>
-                        <enable>!Skin.HasSetting(DisableWallScroll)</enable>
-                        <onclick>Skin.ToggleSetting(WallShowInfo)</onclick>
-                        <selected>Skin.HasSetting(WallShowInfo)</selected>
                     </control>
 
                     <!-- ================ -->
@@ -462,7 +485,7 @@
                     <control type="radiobutton" id="19506" description="Show clearart">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9005)</visible>
                         <include>Defs_Settings_Button</include>
-                        <label>Autoclose OSD</label>
+                        <label>$LOCALIZE[31231]</label>
                         <label2>$INFO[Skin.String(OSD_Timeout),,       ]</label2>
                         <onclick condition="!System.HasAddon(script.toolbox)">InstallAddon(script.toolbox)</onclick>
                         <onclick>SetProperty(Dialog.1.Label,$LOCALIZE[13170])</onclick>
@@ -551,6 +574,14 @@
                         <label>$LOCALIZE[31377]</label>
                         <selected>!Skin.HasSetting(NormalLyrics)</selected>
                         <onclick>Skin.ToggleSetting(NormalLyrics)</onclick>
+                    </control>
+
+                    <control type="radiobutton" id="19611" description="Standard style">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9006)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>$LOCALIZE[31021]</label>
+                        <selected>!Skin.HasSetting(StandardMusicOSD)</selected>
+                        <onclick>Skin.ToggleSetting(StandardMusicOSD)</onclick>
                     </control>
 
 
@@ -647,7 +678,7 @@
                     <control type="label" id="19801" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>Lists and Menus</label>
+                        <label>$LOCALIZE[31255]</label>
                     </control>
 
                     <control type="button" id="19802" description="Customise Shutdown Menu">
@@ -664,6 +695,13 @@
                         <onclick>ActivateWindow(1119)</onclick>
                     </control>
 
+                    <control type="button" id="19811" description="Info Buttons">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>$LOCALIZE[31090]</label>
+                        <onclick>ActivateWindow(1120)</onclick>
+                    </control>
+
                     <control type="button" id="19804" description="Search lists">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Defs_Settings_Button</include>
@@ -674,10 +712,10 @@
                     <control type="label" id="19805" description="LABEL">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Dialog_Standard_HintLabel</include>
-                        <label>Miscellaneous</label>
+                        <label>$LOCALIZE[31143]</label>
                     </control>
 
-                    <control type="button" id="198067" description="Set Timer Per Image">
+                    <control type="button" id="19806" description="Set Timer Per Image">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Defs_Settings_Button</include>
                         <label>$LOCALIZE[31128]</label>
@@ -708,14 +746,6 @@
                         <onclick>Skin.ToggleSetting(KioskMode)</onclick>
                     </control>
 
-                    <!-- <control type="radiobutton" id="19808" description="Mirage">
-                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
-                        <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31043]</label>
-                        <selected>!Skin.HasSetting(MirageShowcase)</selected>
-                        <onclick>Skin.ToggleSetting(MirageShowcase)</onclick>
-                    </control> -->
-
                     <control type="button" id="19809" description="Startup Video">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Defs_Settings_Button</include>
@@ -728,10 +758,10 @@
                     <control type="button" id="19810" description="Reset">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9008)</visible>
                         <include>Defs_Settings_Button</include>
-                        <label>$LOCALIZE[31028]</label>
+                        <label>$LOCALIZE[31086]</label>
                         <onclick>Skin.ResetSettings</onclick>
                         <onclick>ClearProperty(SkinInitStarted,Home)</onclick>
-                        <onclick>RunScript(script.skinshortcuts,type=resetall)</onclick>
+                        <onclick>ActivateWindow(Home)</onclick>
                     </control>
 
                     <!-- ================ -->
@@ -889,6 +919,9 @@
 
                 </control>
 
+                <include content="Dialog_Settings_Arrows">
+                    <param name="id" value="9999" />
+                </include>
 
 
                 <include content="Dialog_Separator">

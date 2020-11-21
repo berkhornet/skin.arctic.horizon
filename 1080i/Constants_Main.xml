@@ -17,8 +17,17 @@
     <constant name="widgets_item_height">420</constant>
     <constant name="widgets_label_top">370</constant>
     <constant name="widgets_item_top">230</constant>
+    <constant name="widgets_info_item_top">660</constant>
     <constant name="widgets_bumper_top">220</constant>
     <constant name="widgets_bumper_bottom">410</constant>
+
+    <constant name="widgets_submenu_item_height">250</constant>
+    <constant name="widgets_submenu_label_top">370</constant>
+    <constant name="widgets_submenu_item_top">230</constant>
+
+    <constant name="widgets_lovefilm_item_height">590</constant>
+    <constant name="widgets_lovefilm_label_top">370</constant>
+    <constant name="widgets_lovefilm_item_top">230</constant>
 
     <constant name="widgets_settings_top_item_height">500</constant>
     <constant name="widgets_settings_top_label_top">370</constant>
@@ -60,8 +69,11 @@
     <constant name="item_view_height">390</constant>
     <constant name="item_settings_height">240</constant>
     <constant name="item_square_width">300</constant>
+    <constant name="-item_square_width">-300</constant>
     <constant name="item_landscape_width">450</constant>
+    <constant name="-item_landscape_width">-450</constant>
     <constant name="item_poster_width">257.14</constant>
+    <constant name="-item_poster_width">-257.14</constant>
 
     <constant name="dialog_top">120</constant>
     <constant name="dialog_pad">40</constant>

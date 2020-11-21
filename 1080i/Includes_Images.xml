@@ -6,16 +6,27 @@
         <value>indicator/circle</value>
     </variable>
 
-    <variable name="Image_RottenTomatoes">
+    <variable name="Image_ListItem_RottenTomatoes">
         <value condition="String.IsEqual(Window(home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),certified)">certified.png</value>
         <value condition="String.IsEqual(Window(home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),fresh)">rtfresh.png</value>
         <value condition="String.IsEqual(Window(home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),rotten)">rtrotten.png</value>
         <value condition="Integer.IsGreater(Window(home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),59)">rtfresh.png</value>
         <value>rtrotten.png</value>
     </variable>
+    <variable name="Image_Player_RottenTomatoes">
+        <value condition="String.IsEqual(Window(home).Property(TMDbHelper.Player.RottenTomatoes_Image),certified)">certified.png</value>
+        <value condition="String.IsEqual(Window(home).Property(TMDbHelper.Player.RottenTomatoes_Image),fresh)">rtfresh.png</value>
+        <value condition="String.IsEqual(Window(home).Property(TMDbHelper.Player.RottenTomatoes_Image),rotten)">rtrotten.png</value>
+        <value condition="Integer.IsGreater(Window(home).Property(TMDbHelper.Player.RottenTomatoes_Rating),59)">rtfresh.png</value>
+        <value>rtrotten.png</value>
+    </variable>
 
-    <variable name="Image_RottenTomatoes_UserMeter">
+    <variable name="Image_ListItem_RottenTomatoes_UserMeter">
         <value condition="Integer.IsGreater(Window(home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),59)">popcorn.png</value>
+        <value>popcorn_spilt.png</value>
+    </variable>
+    <variable name="Image_Player_RottenTomatoes_UserMeter">
+        <value condition="Integer.IsGreater(Window(home).Property(TMDbHelper.Player.RottenTomatoes_UserMeter),59)">popcorn.png</value>
         <value>popcorn_spilt.png</value>
     </variable>
 
@@ -30,11 +41,11 @@
     </variable>
 
     <variable name="Image_56560_VideoQuality">
-        <value condition="Container(56560).ListItem.Property(IsCollection)">flags/quality/sets.png</value>
-        <value condition="Integer.IsGreater(Container(56560).ListItem.Property(VideoResolution),1080) | String.IsEqual(Container(56560).ListItem.Property(VideoResolution),4K)">flags/quality/4k.png</value>
-        <value condition="Integer.IsGreater(Container(56560).ListItem.Property(VideoResolution),719)">flags/quality/hd.png</value>
-        <value condition="!String.IsEmpty(Container(56560).ListItem.Property(VideoResolution))">flags/quality/sd.png</value>
-        <value condition="String.IsEqual(Container(56560).ListItem.Property(DBType),movie) | String.IsEqual(Container(56560).ListItem.Property(DBType),episode) | String.IsEqual(Container(56560).ListItem.Property(DBType),video)">flags/quality/web.png</value>
+        <value condition="Container(56560).ListItemAbsolute(0).Property(IsCollection)">flags/quality/sets.png</value>
+        <value condition="Integer.IsGreater(Container(56560).ListItemAbsolute(0).Property(VideoResolution),1080) | String.IsEqual(Container(56560).ListItemAbsolute(0).Property(VideoResolution),4K)">flags/quality/4k.png</value>
+        <value condition="Integer.IsGreater(Container(56560).ListItemAbsolute(0).Property(VideoResolution),719)">flags/quality/hd.png</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(VideoResolution))">flags/quality/sd.png</value>
+        <value condition="String.IsEqual(Container(56560).ListItemAbsolute(0).Property(DBType),movie) | String.IsEqual(Container(56560).ListItemAbsolute(0).Property(DBType),episode) | String.IsEqual(Container(56560).ListItemAbsolute(0).Property(DBType),video)">flags/quality/web.png</value>
         <value>flags/quality/info.png</value>
     </variable>
 
@@ -50,6 +61,15 @@
     <variable name="Image_SkinLogo">
         <value condition="!String.IsEmpty(Skin.String(SkinLogo))">$INFO[Skin.String(SkinLogo)]</value>
         <value>special://skin/extras/icons/kodi.png</value>
+    </variable>
+
+    <variable name="Image_Home_ClearArt">
+        <value condition="Skin.HasSetting(DisableClearArt)">common/null.png</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(clearart))">$INFO[Container(56560).ListItemAbsolute(0).Property(clearart)]</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(tvshow.clearart))">$INFO[Container(56560).ListItemAbsolute(0).Property(tvshow.clearart)]</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(artist.clearart))">$INFO[Container(56560).ListItemAbsolute(0).Property(artist.clearart)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.clearart))">$INFO[Window(Home).Property(TMDbHelper.ListItem.clearart)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.tvshow.clearart))">$INFO[Window(Home).Property(TMDbHelper.ListItem.tvshow.clearart)]</value>
     </variable>
 
     <variable name="Image_ClearArt">
@@ -73,8 +93,19 @@
     </variable>
 
     <variable name="Image_Home_Clearlogo">
-        <value condition="!String.IsEmpty(Container(5610).ListItem.Art(tvshow.clearlogo))">$INFO[Container(5610).ListItem.Art(tvshow.clearlogo)]</value>
-        <value condition="!String.IsEmpty(Container(5610).ListItem.Art(clearlogo))">$INFO[Container(5610).ListItem.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(3001).ListItem.Art(tvshow.clearlogo))">$INFO[Container(3001).ListItem.Art(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(3001).ListItem.Art(clearlogo))">$INFO[Container(3001).ListItem.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(tvshow.clearlogo))">$INFO[Container(56560).ListItemAbsolute(0).Property(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(56560).ListItemAbsolute(0).Property(clearlogo))">$INFO[Container(56560).ListItemAbsolute(0).Property(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.clearlogo))">$INFO[Window(Home).Property(TMDbHelper.ListItem.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.tvshow.clearlogo))">$INFO[Window(Home).Property(TMDbHelper.ListItem.tvshow.clearlogo)]</value>
+    </variable>
+
+    <variable name="Image_Mirage_Clearlogo">
+        <value condition="!String.IsEmpty(Container(1297).ListItem.Art(tvshow.clearlogo))">$INFO[Container(1297).ListItem.Art(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(1297).ListItem.Art(clearlogo))">$INFO[Container(1297).ListItem.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.clearlogo))">$INFO[Window(Home).Property(TMDbHelper.ListItem.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.tvshow.clearlogo))">$INFO[Window(Home).Property(TMDbHelper.ListItem.tvshow.clearlogo)]</value>
     </variable>
 
     <variable name="Image_AddonInfo_Enable">
@@ -101,6 +132,7 @@
         <value condition="String.Contains(ListItem.FileNameAndPath,hdtv) | String.Contains(ListItem.FileNameAndPath,pdtv) | String.Contains(ListItem.FileNameAndPath,dsr)">flags/$VAR[Defs_ColorMode_Dir]/other/hdtv.png</value>
         <value condition="String.Contains(ListItem.FileNameAndPath,sdtv)">flags/$VAR[Defs_ColorMode_Dir]/other/sdtv.png</value>
         <value condition="String.Contains(ListItem.FileNameAndPath,web-dl) | String.Contains(ListItem.FileNameAndPath,webdl) | String.Contains(ListItem.FileNameAndPath,WEBRip) | String.EndsWith(ListItem.FileNameAndPath,.strm) | [String.IsEmpty(ListItem.VideoCodec) + String.IsEmpty(ListItem.AudioCodec)]">flags/$VAR[Defs_ColorMode_Dir]/other/web-dl.png</value>
+        <value>common/null.png</value>
     </variable>
 
     <variable name="Image_AudioCodec">
@@ -129,7 +161,8 @@
     <variable name="Image_OSD_Artwork">
         <value condition="!String.IsEmpty(Player.Art(tvshow.poster))">$INFO[Player.Art(tvshow.poster)]</value>
         <value condition="!String.IsEmpty(Player.Art(poster))">$INFO[Player.Art(poster)]</value>
-        <value>$INFO[VideoPlayer.Cover]</value>
+        <value condition="!String.IsEmpty(VideoPlayer.Cover)">$INFO[VideoPlayer.Cover]</value>
+        <value condition="!String.IsEmpty(MusicPlayer.Cover)">$INFO[MusicPlayer.Cover]</value>
     </variable>
 
     <variable name="Image_ArtistFanartVis">
@@ -166,16 +199,10 @@
         <value condition="!String.IsEmpty(ListItem.Art(artist.clearlogo))">$INFO[ListItem.Art(artist.clearlogo)]</value>
     </variable>
 
-    <variable name="Image_Home_ClearLogo">
-        <value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.clearlogo))">$INFO[ListItem.Art(tvshow.clearlogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(artist.clearlogo))">$INFO[ListItem.Art(artist.clearlogo)]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.clearlogo))">$INFO[Window(Home).Property(TMDbHelper.ListItem.clearlogo)]</value>
-    </variable>
-
-    <variable name="Image_TopBar_ClearLogo">
-        <value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.clearlogo))">$INFO[ListItem.Art(tvshow.clearlogo)]</value>
+    <variable name="Image_ClearLogo_C5610">
+        <value condition="!String.IsEmpty(Container(5610).ListItem.Art(clearlogo))">$INFO[Container(5610).ListItem.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(5610).ListItem.Art(tvshow.clearlogo))">$INFO[Container(5610).ListItem.Art(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Container(5610).ListItem.Art(artist.clearlogo))">$INFO[Container(5610).ListItem.Art(artist.clearlogo)]</value>
     </variable>
 
     <variable name="Image_Watched">
@@ -209,9 +236,15 @@
 
         <value condition="String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + String.IsEqual(ListItem.DBType,episode) + [String.IsEqual(Window(Home).Property(LatestEpisode.1.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.2.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.3.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.4.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.5.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.6.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.7.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.8.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.9.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.10.EpisodeTitle),ListItem.Title)] + !Skin.HasSetting(DisableIndicator.New)">indicator/new-fo.png</value>
 
-        <value condition="!String.IsEmpty(ListItem.Property(Container.Info)) + !String.IsEmpty(ListItem.DBID) + !Skin.HasSetting(DisableIndicator.Library)">indicator/library.png</value>
+        <value condition="!String.IsEmpty(ListItem.Property(Item.Info)) + !String.IsEmpty(ListItem.DBID) + !Skin.HasSetting(DisableIndicator.Library)">indicator/library.png</value>
         <value condition="ListItem.IsCollection + !Skin.HasSetting(DisableIndicator.MovieSet)">indicator/movieset.png</value>
         <value condition="ListItem.IsFolder">indicator/folder.png</value>
+
+        <value condition="Window.IsVisible(AddonBrowser.xml) + !String.IsEmpty(ListItem.AddonBroken)">indicator/broken.png</value>
+        <value condition="Window.IsVisible(AddonBrowser.xml) + ListItem.Property(addon.orphaned)">indicator/orphaned.png</value>
+        <value condition="Window.IsVisible(AddonBrowser.xml) + ListItem.Property(addon.downloading)">indicator/download.png</value>
+        <value condition="Window.IsVisible(AddonBrowser.xml) + ListItem.Property(addon.isinstalled) + !ListItem.Property(addon.isenabled) + Window.IsActive(addonbrowser)">indicator/disabled.png</value>
+        <value condition="Window.IsVisible(AddonBrowser.xml) + ListItem.Property(addon.hasupdate)">indicator/update.png</value>
         <value>indicator/library.png</value>
     </variable>
 
@@ -221,30 +254,9 @@
         <value>indicator/inprogress-25.png</value>
     </variable>
 
-    <variable name="Image_Overlay_Focus">
-        <value condition="[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season)] + !Integer.IsEqual(ListItem.Property(UnWatchedEpisodes),0) + !Skin.HasSetting(DisableIndicator.Episodes)">common/null.png</value>
-        <value condition="ListItem.IsRecording">indicator/record.png</value>
-        <value condition="ListItem.HasTimer">indicator/timer.png</value>
-        <value condition="ListItem.IsResumable + !Skin.HasSetting(DisableIndicator.Progress)">$VAR[Image_Overlay_IsResumable]</value>
-
-        <value condition="String.IsEqual(ListItem.Overlay,OverlayWatched.png) + !Skin.HasSetting(DisableIndicator.Watched)">indicator/checkmark-fo.png</value>
-        <value condition="Integer.IsGreater(ListItem.PlayCount,0) + !String.IsEqual(ListItem.DBType,song) + !String.IsEqual(ListItem.DBType,album) + !String.IsEqual(ListItem.DBType,artist) + !String.IsEqual(ListItem.DBType,image) + !String.IsEqual(ListItem.DBType,addon) + !Skin.HasSetting(DisableIndicator.Watched)">indicator/checkmark-fo.png</value>
-
-        <value condition="String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + String.IsEqual(ListItem.DBType,movie) + [String.IsEqual(Window(Home).Property(LatestMovie.1.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.2.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.3.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.4.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.5.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.6.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.7.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.8.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.9.Title),ListItem.Label) | String.IsEqual(Window(Home).Property(LatestMovie.10.Title),ListItem.Label)] + !Skin.HasSetting(DisableIndicator.New)">indicator/new-fo.png</value>
-
-        <value condition="String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + String.IsEqual(ListItem.DBType,episode) + [String.IsEqual(Window(Home).Property(LatestEpisode.1.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.2.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.3.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.4.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.5.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.6.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.7.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.8.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.9.EpisodeTitle),ListItem.Title) | String.IsEqual(Window(Home).Property(LatestEpisode.10.EpisodeTitle),ListItem.Title)] + !Skin.HasSetting(DisableIndicator.New)">indicator/new-fo.png</value>
-
-        <value condition="!String.IsEmpty(ListItem.Property(Container.Info)) + !String.IsEmpty(ListItem.DBID) + !Skin.HasSetting(DisableIndicator.Library)">indicator/library.png</value>
-        <value condition="ListItem.IsCollection + !Skin.HasSetting(DisableIndicator.MovieSet)">indicator/movieset.png</value>
-
-        <value condition="Window.IsVisible(AddonBrowser.xml)">$VAR[Image_Overlay_Addons]</value>
-    </variable>
-
-    <variable name="Image_Banner">
-        <value condition="!String.IsEmpty(ListItem.Art(banner))">$INFO[ListItem.Art(banner)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.banner))">$INFO[ListItem.Art(tvshow.banner)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
-        <value>$INFO[ListItem.Icon]</value>
+    <variable name="Image_Overlay_Watched">
+        <value condition="!Skin.HasSetting(EnableClassicIndicators)">common/null.png</value>
+        <value>indicator/checkmark-classic.png</value>
     </variable>
 
     <variable name="Image_Fanart">

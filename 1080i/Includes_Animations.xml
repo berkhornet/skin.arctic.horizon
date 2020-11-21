@@ -6,11 +6,6 @@
         <animation effect="slide" start="-160" end="0" time="300" tween="quadratic" condition="Control.HasFocus(301) | Control.HasFocus(303) | [Control.HasFocus(3992) + String.IsEmpty(Window.Property(WidgetFocus))] | Skin.HasSetting(LockMainMenu)">WindowOpen</animation>
     </include>
 
-    <include name="Animation_WallView_Fade">
-        <animation effect="fade" reversible="false" start="0" end="100" delay="399" time="1" condition="![Control.HasFocus(5151) | Control.HasFocus(5252) | Control.HasFocus(5353) | Control.HasFocus(5454) | Control.HasFocus(5656) | Control.Hasfocus(5858) | Control.HAsfocus(5959)]">Conditional</animation>
-        <animation effect="fade" reversible="false" end="0" start="100" condition="[Control.HasFocus(5151) | Control.HasFocus(5252) | Control.HasFocus(5353) | Control.HasFocus(5454) | Control.HasFocus(5656) | Control.Hasfocus(5858) | Control.HAsfocus(5959)]">Conditional</animation>
-    </include>
-
     <include name="Animation_Settings">
         <animation type="WindowOpen" reversible="false" condition="!Window.Previous(SettingsCategory.xml) + !Window.Previous(SkinSettings.xml) + !Window.Previous(SettingsProfile.xml) + !Window.Previous(SettingsSystemInfo.xml)">
             <effect type="fade" start="0" end="100" time="300" delay="150"/>
@@ -19,6 +14,15 @@
     </include>
 
     <include name="Animation_UpDown">
+        <include condition="!Skin.HasSetting(EnableHorizontalHome)" content="Animation_UpDown_Vertical">
+            <param name="visible" value="$PARAM[visible]" />
+        </include>
+        <include condition="Skin.HasSetting(EnableHorizontalHome)" content="Animation_UpDown_Horizontal">
+            <param name="visible" value="$PARAM[visible]" />
+        </include>
+    </include>
+
+    <include name="Animation_UpDown_Vertical">
         <animation type="Visible" reversible="false">
             <effect type="fade" start="0" end="100" delay="0" time="300" tween="sine" easing="out"/>
         </animation>
@@ -28,9 +32,6 @@
         <animation type="Conditional" reversible="false" condition="$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnDown)">
             <effect type="slide" start="0,320" end="0" delay="0" time="400" tween="cubic" easing="out" />
         </animation>
-        <!-- <animation type="Conditional" reversible="false" condition="$PARAM[visible] + String.IsEmpty(Window(Home).Property(WidgetMovement))">
-            <effect type="slide" start="0,320" end="0" time="400" tween="cubic" easing="out" />
-        </animation> -->
 
         <animation type="Hidden" reversible="false">
             <effect type="fade" start="100" end="0" time="300" tween="sine" easing="out" />
@@ -41,9 +42,27 @@
         <animation type="Conditional" reversible="false" condition="!$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnDown)">
             <effect type="slide" end="0,-320" start="0" time="400" tween="cubic" easing="out" />
         </animation>
-        <!-- <animation type="Conditional" reversible="false" condition="!$PARAM[visible] + String.IsEmpty(Window(Home).Property(WidgetMovement))">
-            <effect type="slide" end="0,-320" start="0" time="400" tween="cubic" easing="out" />
-        </animation> -->
+    </include>
+    <include name="Animation_UpDown_Horizontal">
+        <animation type="Visible" reversible="false">
+            <effect type="fade" start="0" end="100" delay="0" time="300" tween="sine" easing="out"/>
+        </animation>
+        <animation type="Conditional" reversible="false" condition="$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnUp)">
+            <effect type="slide" start="-320" end="0" delay="0" time="400" tween="cubic" easing="out" />
+        </animation>
+        <animation type="Conditional" reversible="false" condition="$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnDown)">
+            <effect type="slide" start="320" end="0" delay="0" time="400" tween="cubic" easing="out" />
+        </animation>
+
+        <animation type="Hidden" reversible="false">
+            <effect type="fade" start="100" end="0" time="300" tween="sine" easing="out" />
+        </animation>
+        <animation type="Conditional" reversible="false" condition="!$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnUp)">
+            <effect type="slide" end="320" start="0" time="400" tween="cubic" easing="out" />
+        </animation>
+        <animation type="Conditional" reversible="false" condition="!$PARAM[visible] + String.IsEqual(Window(Home).Property(WidgetMovement),OnDown)">
+            <effect type="slide" end="-320" start="0" time="400" tween="cubic" easing="out" />
+        </animation>
     </include>
 
     <include name="Animation_Down">
@@ -59,20 +78,20 @@
 
     <include name="Animation_Down_Info">
         <animation type="WindowOpen" reversible="false">
-            <effect type="fade" start="0" end="100" delay="400" time="300" tween="sine" easing="out"/>
-            <effect type="slide" start="0,320" end="0" delay="400" time="400" tween="cubic" easing="out" />
+            <effect type="fade" start="0" end="100" time="200" tween="sine" easing="out"/>
+            <effect type="slide" start="0,900" end="0" time="400" tween="cubic" easing="out" />
         </animation>
         <animation type="WindowClose" reversible="false">
-            <effect type="fade" start="100" end="0" time="300" tween="sine" easing="out" />
-            <effect type="slide" start="0" end="0,320" time="300" tween="cubic" easing="out" />
+            <effect type="fade" start="100" end="0" delay="200" time="200" tween="sine" easing="out" />
+            <effect type="slide" start="0" end="0,900" time="400" tween="cubic" easing="out" />
         </animation>
         <animation type="Visible" reversible="false">
-            <effect type="fade" start="0" end="100" time="300" tween="sine" easing="out"/>
-            <effect type="slide" start="0,320" end="0" time="400" tween="cubic" easing="out" />
+            <effect type="fade" start="0" end="100" time="200" tween="sine" easing="out"/>
+            <effect type="slide" start="0,900" end="0" time="400" tween="cubic" easing="out" />
         </animation>
         <animation type="Hidden" reversible="false">
-            <effect type="fade" start="100" end="0" time="300" tween="sine" easing="out" />
-            <effect type="slide" start="0" end="0,320" time="300" tween="cubic" easing="out" />
+            <effect type="fade" start="100" end="0" delay="200" time="200" tween="sine" easing="out" />
+            <effect type="slide" start="0" end="0,900" time="400" tween="cubic" easing="out" />
         </animation>
     </include>
 
@@ -104,31 +123,6 @@
         <animation type="WindowClose" reversible="false">
             <effect type="fade" start="100" end="0" time="300" tween="sine" easing="out" />
             <effect type="slide" start="0" end="-320" time="300" tween="cubic" easing="out" />
-        </animation>
-    </include>
-
-    <include name="Animation_Info_Left">
-        <animation type="Visible" reversible="false">
-            <effect type="fade" start="0" end="100" time="300" tween="sine" easing="out"/>
-            <effect type="slide" start="-700" end="0" time="400" tween="cubic" easing="out" />
-        </animation>
-        <animation type="WindowOpen" reversible="false">
-            <effect type="fade" start="0" end="100" time="300" tween="sine" easing="out"/>
-            <effect type="slide" start="-700" end="0" time="400" tween="cubic" easing="out" />
-        </animation>
-        <animation type="WindowClose" reversible="false">
-            <effect type="fade" end="0" start="100" delay="100" time="300" tween="sine" easing="out"/>
-            <effect type="slide" end="-700" start="0" time="400" tween="cubic" easing="out" />
-        </animation>
-    </include>
-
-    <include name="Animation_Info">
-        <animation type="WindowOpen" reversible="false">
-            <effect type="slide" start="-700" end="0" time="400" tween="quadratic" />
-        </animation>
-        <animation type="WindowClose" reversible="false">
-            <effect type="fade" end="0" start="100" delay="400" time="1" />
-            <effect type="slide" end="-700" start="0" time="400" tween="quadratic" />
         </animation>
     </include>
 
@@ -209,10 +203,6 @@
         <animation effect="fade" start="100" end="0" time="400" tween="cubic" easing="inout">Hidden</animation>
     </include>
 
-    <include name="Animation_FadeIn_FromHome">
-        <animation effect="fade" start="0" end="100" time="400" tween="cubic" easing="inout" condition="Window.Previous(Home)">WindowOpen</animation>
-    </include>
-
     <include name="Animation_FadeIn">
         <animation effect="fade" start="0" end="100" time="400" tween="cubic" easing="inout">Visible</animation>
         <animation effect="fade" start="0" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
@@ -220,12 +210,6 @@
 
     <include name="Animation_FadeIn_Delay">
         <animation effect="fade" start="0" end="100" time="400" tween="cubic" easing="inout" reversible="false" delay="200">Visible</animation>
-    </include>
-
-    <include name="Animation_Info_Fade_Delay">
-        <animation type="Conditional" condition="Control.HasFocus(8000) + !String.IsEmpty(Window.Property(windowopen))">
-            <effect type="fade" start="100" end="0" time="1" delay="0" />
-        </animation>
     </include>
 
     <include name="Animation_ZoomIn">
