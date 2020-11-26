@@ -447,7 +447,7 @@
 			        <width>217</width>
 			        <height>61</height>
 			        <bordersize>0</bordersize>
-			        <texture>$INFO[ListItem.Icon]</texture>
+					<texture fallback="C:\Users\mick\AppData\Roaming\Kodi\userdata\customisations\PVR\PVR Logo Pack - No Tags\LIVE FOOTBALL.png">$INFO[ListItem.Icon]</texture>
 			        <aspectratio aligny="center" align="right">keep</aspectratio>
 			    </control>
 				<!-- Channel Resolution icons added -->
@@ -648,9 +648,22 @@
                 <textoffsetx>0</textoffsetx>
                 <font>font_tiny_bold</font>
                 <label>$INFO[ListItem.Label]</label>
-                <visible>$PARAM[visible]</visible>
+				<!-- + !String.IsEqual(ListItem.Label,"No Information available") added to visible tag -->
+                <visible>$PARAM[visible] + !String.IsEqual(ListItem.Label,"No Information available")</visible>
                 <visible>!$PARAM[sublabel]</visible>
             </control>
+			<!-- alternative text displayed (channel name) for live football -->
+			<control type="label" id="1">
+                <left>20</left>
+                <width>481</width>
+                <aligny>center</aligny>
+                <textcolor>$PARAM[fgcolor]</textcolor>
+                <textoffsetx>0</textoffsetx>
+                <font>font_tiny_bold</font>
+                <label>$INFO[ListItem.ChannelName]</label>
+                <visible>$PARAM[visible] + String.IsEqual(ListItem.Label,"No Information available")</visible>
+                <visible>!$PARAM[sublabel]</visible>
+			</control>
             <control type="label" id="1">
                 <left>20</left>
                 <width>481</width>
