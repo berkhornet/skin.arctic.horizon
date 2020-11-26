@@ -450,6 +450,7 @@
 			        <bordersize>0</bordersize>
 					<texture>$INFO[ListItem.Icon]</texture>
 			        <aspectratio aligny="center" align="right">keep</aspectratio>
+					<visible>!String.Contains(ListItem.ChannelName,"ifollow") + !String.Contains(ListItem.ChannelName,"LIVE EFL")</visible>
 			    </control>
 				<!-- Channel Icon for Live Football Channels -->
 				<control type="image">
