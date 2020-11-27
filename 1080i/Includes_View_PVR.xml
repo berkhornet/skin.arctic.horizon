@@ -450,18 +450,29 @@
 			        <bordersize>0</bordersize>
 					<texture>$INFO[ListItem.Icon]</texture>
 			        <aspectratio aligny="center" align="right">keep</aspectratio>
-					<visible>!String.Contains(ListItem.ChannelName,"ifollow") + !String.Contains(ListItem.ChannelName,"LIVE EFL")</visible>
+					<visible>!String.Contains(ListItem.ChannelName,"ifollow") + !String.Contains(ListItem.ChannelName,"LIVE EFL") + !String.Contains(ListItem.ChannelName,"EPL ")</visible>
 			    </control>
-				<!-- Channel Icon for Live Football Channels -->
+				<!-- Channel Icon for Live EFL -->
 				<control type="image">
 			        <posx>40</posx>
 			        <posy>11</posy>
 			        <width>217</width>
 			        <height>61</height>
 			        <bordersize>0</bordersize>
-					<texture>special://masterprofile/customisations\PVR\PVR Logo Pack - No Tags\LIVE FOOTBALL.png</texture>
+					<texture>special://masterprofile/customisations\PVR\PVR Logo Pack - No Tags\LIVE EFL.png</texture>
 			        <aspectratio aligny="center" align="right">keep</aspectratio>
-					<visible>String.Contains(ListItem.ChannelName,"ifollow") | String.Contains(ListItem.ChannelName,"LIVE EFL")</visible>
+					<visible>String.Contains(ListItem.ChannelName,"ifollow") | String.Contains(ListItem.ChannelName,"LIVE EFL" | String.Contains(ListItem.ChannelName,"EPL ")</visible>
+			    </control>
+				<!-- Channel Icon for Live EPL -->
+				<control type="image">
+			        <posx>40</posx>
+			        <posy>11</posy>
+			        <width>217</width>
+			        <height>61</height>
+			        <bordersize>0</bordersize>
+					<texture>special://masterprofile/customisations\PVR\PVR Logo Pack - No Tags\LIVE EPL.png</texture>
+			        <aspectratio aligny="center" align="right">keep</aspectratio>
+					<visible>String.Contains(ListItem.ChannelName,"EPL ")</visible>
 			    </control>
 				<!-- Channel Resolution icons added -->
 				<control type="image">
